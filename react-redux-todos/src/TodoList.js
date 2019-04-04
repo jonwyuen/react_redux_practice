@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Todo from "./Todo";
 
 class TodoList extends Component {
   constructor(props) {
@@ -9,9 +10,11 @@ class TodoList extends Component {
   }
 
   render() {
-    const todos = this.state.todos.map(todo => <li>{todo}</li>)
+    const todos = this.state.todos.map((todo, idx) => <Todo todo={todo} key={idx} />)
     return(
-      <div>{todos}</div>
+      <div>
+        <ul>{todos}</ul>
+      </div>
     )
   }
 }
