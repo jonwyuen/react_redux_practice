@@ -10,14 +10,13 @@ class TodoList extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e, todo) {
-    e.preventDefault();
+  handleSubmit(todo) {
     this.props.addTodo(todo);
   }
 
   render() {
-    const todos = this.props.todos.map((todo, idx) => (
-      <Todo todo={todo} key={idx} />
+    const todos = this.props.todos.map(todo => (
+      <Todo todo={todo.task} key={todo.id} />
     ));
     return (
       <div>
