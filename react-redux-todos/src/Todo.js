@@ -1,5 +1,30 @@
-import React from "react";
+import React, { Component } from "react";
 
-const Todo = ({ todo }) => (<li>{todo}</li>)
+class Todo extends Component {
+  constructor(props) {
+    super(props);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete() {
+    this.props.handleDelete(this.props.id);
+  }
+
+  render() {
+    return (
+      <div>
+        <li>
+          {this.props.todo}
+          <span
+            style={{ color: "red", marginLeft: "10px" }}
+            onClick={this.handleDelete}
+          >
+            X
+          </span>
+        </li>
+      </div>
+    );
+  }
+}
 
 export default Todo;
