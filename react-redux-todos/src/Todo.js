@@ -15,12 +15,12 @@ class Todo extends Component {
       <div>
         <li>
           {this.props.todo}
-          <span
+          <button
             style={{ color: "red", marginLeft: "10px" }}
             onClick={this.handleDelete}
           >
             X
-          </span>
+          </button>
         </li>
       </div>
     );
