@@ -18,10 +18,11 @@ class TodoForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.handleSubmit(this.state.todo);
-    this.setState({
-      todo: ""
-    });
+    this.props.addTodo(this.state.todo);
+    e.target.reset();
+    // this.setState({
+    //   todo: ""
+    // });
   }
 
   render() {

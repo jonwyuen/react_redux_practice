@@ -7,15 +7,15 @@ import { addTodo, removeTodo } from "./actionCreators";
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.addTodo = this.addTodo.bind(this);
+    this.removeTodo = this.removeTodo.bind(this);
   }
 
-  handleDelete(id) {
+  removeTodo(id) {
     this.props.removeTodo(id);
   }
 
-  handleSubmit(todo) {
+  addTodo(todo) {
     this.props.addTodo(todo);
   }
 
@@ -25,12 +25,12 @@ class TodoList extends Component {
         todo={todo.task}
         id={todo.id}
         key={todo.id}
-        handleDelete={this.handleDelete}
+        removeTodo={this.removeTodo}
       />
     ));
     return (
       <div>
-        <TodoForm handleSubmit={this.handleSubmit} />
+        <TodoForm addTodo={this.addTodo} />
         <ul>{todos}</ul>
       </div>
     );

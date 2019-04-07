@@ -7,7 +7,7 @@ class Todo extends Component {
   }
 
   handleDelete() {
-    this.props.handleDelete(this.props.id);
+    this.props.removeTodo(this.props.id);
   }
 
   render() {
