@@ -39,6 +39,7 @@ class Todo extends Component {
             todo={this.props.todo}
             id={this.props.id}
             handleEdit={this.props.editTodo}
+            toggleEditForm={this.toggleEditForm}
           />
         ) : null}
       </div>

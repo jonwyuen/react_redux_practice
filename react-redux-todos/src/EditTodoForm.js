@@ -19,6 +19,7 @@ class EditTodoForm extends Component {
   handleEdit(e) {
     e.preventDefault();
     this.props.handleEdit(this.props.id, this.state.todo);
+    this.props.toggleEditForm();
     this.setState({
       todo: this.props.todo
     });
