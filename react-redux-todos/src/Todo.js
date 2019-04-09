@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import EditForm from "./EditForm";
+import EditTodoForm from "./EditTodoForm";
 
 class Todo extends Component {
   constructor(props) {
@@ -8,14 +8,14 @@ class Todo extends Component {
       showEditForm: false
     };
     this.handleDelete = this.handleDelete.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
+    this.toggleEditForm = this.toggleEditForm.bind(this);
   }
 
   handleDelete() {
     this.props.removeTodo(this.props.id);
   }
 
-  handleEdit() {
+  toggleEditForm() {
     this.setState({
       showEditForm: !this.state.showEditForm
     });
@@ -26,7 +26,7 @@ class Todo extends Component {
       <div>
         <li>
           {this.props.todo}
-          <button onClick={this.handleEdit}>Edit</button>
+          <button onClick={this.toggleEditForm}>Edit</button>
           <button
             style={{ color: "red", marginLeft: "10px" }}
             onClick={this.handleDelete}
@@ -34,7 +34,13 @@ class Todo extends Component {
             X
           </button>
         </li>
-        {this.state.showEditForm ? <EditForm todo={this.props.todo} /> : null}
+        {this.state.showEditForm ? (
+          <EditTodoForm
+            todo={this.props.todo}
+            id={this.props.id}
+            handleEdit={this.props.editTodo}
+          />
+        ) : null}
       </div>
     );
   }

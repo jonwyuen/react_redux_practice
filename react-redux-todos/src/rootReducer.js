@@ -1,11 +1,11 @@
 import { ADD_TODO, REMOVE_TODO, EDIT_TODO } from "./actionCreators";
 
-const initialState = {
+const INITIAL_STATE = {
   todos: [],
   id: 0
 };
 
-const rootReducer = (state = initialState, action) => {
+const rootReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_TODO:
       let newState = { ...state };
@@ -22,7 +22,7 @@ const rootReducer = (state = initialState, action) => {
         if (todo.id === action.payload.id) todo.todo = action.payload.todo;
         return todo;
       });
-      return { ...state, updatedTodos };
+      return { ...state, todos: updatedTodos };
     default:
       return state;
   }
