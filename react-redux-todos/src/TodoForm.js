@@ -20,9 +20,7 @@ class TodoForm extends Component {
     e.preventDefault();
     this.props.addTodo(this.state.todo);
     e.target.reset();
-    // this.setState({
-    //   todo: ""
-    // });
+    this.props.history.push("/todos");
   }
 
   render() {

@@ -3,6 +3,7 @@ import Todo from "./Todo";
 import TodoForm from "./TodoForm";
 import { connect } from "react-redux";
 import { addTodo, removeTodo, editTodo } from "./actionCreators";
+import { Route } from "react-router-dom";
 
 class TodoList extends Component {
   constructor(props) {
@@ -36,8 +37,19 @@ class TodoList extends Component {
     ));
     return (
       <div>
-        <TodoForm addTodo={this.addTodo} />
-        <ul>{todos}</ul>
+        <Route
+          exact
+          path="/todos"
+          render={() => (
+            <div>
+              <ul>{todos}</ul>
+            </div>
+          )}
+        />
+        <Route
+          path="/todos/new"
+          component={props => <TodoForm {...props} addTodo={this.addTodo} />}
+        />
       </div>
     );
   }
