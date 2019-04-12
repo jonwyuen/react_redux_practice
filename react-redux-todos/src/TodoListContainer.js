@@ -1,12 +1,12 @@
 import React from "react";
 import TodoList from "./TodoList";
 import { connect } from "react-redux";
-import { removeTodo } from "./actions";
+import { removeTodo } from "./actionCreators";
 
-const TodoListContainer = ({ todos, deleteTodo }) => (
+const TodoListContainer = ({ todos, removeTodo }) => (
   <div>
     <h1>Todos</h1>
-    <TodoList todos={todos} deleteTodo={deleteTodo} />
+    <TodoList todos={todos} removeTodo={removeTodo} />
   </div>
 );
 
