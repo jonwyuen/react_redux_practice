@@ -4,7 +4,7 @@ class TodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todo: ""
+      todo: props.todo ? props.todo : ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,7 +18,9 @@ class TodoForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.addTodo(this.state.todo);
+    const id = this.props.match.params.id;
+    if (id) this.props.editTodo(id, this.state.todo);
+    else this.props.addTodo(this.state.todo);
     e.target.reset();
     this.props.history.push("/todos");
   }
@@ -27,14 +29,14 @@ class TodoForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label>Add Todo</label>
+          <label>Todo</label>
           <input
             type="text"
             name="todo"
             id="todo"
             onChange={this.handleChange}
           />
-          <button>Add Todo</button>
+          <button>Save Todo</button>
         </form>
       </div>
     );

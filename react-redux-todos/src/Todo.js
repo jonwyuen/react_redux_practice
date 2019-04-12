@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import EditTodoForm from "./EditTodoForm";
+import { Link } from "react-router-dom";
 
 class Todo extends Component {
   constructor(props) {
@@ -8,25 +9,28 @@ class Todo extends Component {
       showEditForm: false
     };
     this.handleDelete = this.handleDelete.bind(this);
-    this.toggleEditForm = this.toggleEditForm.bind(this);
+    // this.toggleEditForm = this.toggleEditForm.bind(this);
   }
 
   handleDelete() {
     this.props.removeTodo(this.props.id);
   }
 
-  toggleEditForm() {
-    this.setState({
-      showEditForm: !this.state.showEditForm
-    });
-  }
+  // toggleEditForm() {
+  //   this.setState({
+  //     showEditForm: !this.state.showEditForm
+  //   });
+  // }
 
   render() {
+    let { todo, id } = this.props;
     return (
       <div>
         <li>
-          {this.props.todo}
-          <button onClick={this.toggleEditForm}>Edit</button>
+          {todo}
+          <button>
+            <Link to={`/todos/${id}/edit`}>Edit</Link>
+          </button>
           <button
             style={{ color: "red", marginLeft: "10px" }}
             onClick={this.handleDelete}
@@ -34,14 +38,6 @@ class Todo extends Component {
             X
           </button>
         </li>
-        {this.state.showEditForm ? (
-          <EditTodoForm
-            todo={this.props.todo}
-            id={this.props.id}
-            handleEdit={this.props.editTodo}
-            toggleEditForm={this.toggleEditForm}
-          />
-        ) : null}
       </div>
     );
   }

@@ -50,6 +50,10 @@ class TodoList extends Component {
           path="/todos/new"
           component={props => <TodoForm {...props} addTodo={this.addTodo} />}
         />
+        <Route
+          path="/todos/:id/edit"
+          component={props => <TodoForm {...props} editTodo={this.editTodo} />}
+        />
       </div>
     );
   }
