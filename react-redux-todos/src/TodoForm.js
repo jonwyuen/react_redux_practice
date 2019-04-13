@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
 class TodoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todo: props.todo ? props.todo : ""
+      todo: props.todo ? props.todo.todo : "",
+      id: props.todo ? props.todo.id : null,
+      redirect: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,28 +21,30 @@ class TodoForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const id = this.props.match.params.id;
-    if (id) this.props.editTodo(id, this.state.todo);
-    else this.props.addTodo(this.state.todo);
+    this.props.handleSubmit(this.state.id, this.state.todo);
     e.target.reset();
-    this.props.history.push("/todos");
+    this.setState({
+      redirect: true
+    });
   }
 
   render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>Todo</label>
-          <input
-            type="text"
-            name="todo"
-            id="todo"
-            onChange={this.handleChange}
-          />
-          <button>Save Todo</button>
-        </form>
-      </div>
+    const form = this.state.redirect ? (
+      <Redirect to="/todos" />
+    ) : (
+      <form onSubmit={this.handleSubmit}>
+        <label>Todo</label>
+        <input
+          type="text"
+          name="todo"
+          id="todo"
+          value={this.state.todo}
+          onChange={this.handleChange}
+        />
+        <button>Save Todo</button>
+      </form>
     );
+    return <div>{form}</div>;
   }
 }
 

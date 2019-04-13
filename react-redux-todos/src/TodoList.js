@@ -8,7 +8,7 @@ const TodoList = ({ todos, removeTodo }) => {
     <div>
       {todos.map(todo => (
         <Todo
-          task={todo.task}
+          todo={todo.todo}
           id={todo.id}
           key={todo.id}
           removeTodo={removeTodo}

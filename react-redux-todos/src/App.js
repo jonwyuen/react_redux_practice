@@ -2,7 +2,7 @@ import React from "react";
 import TodoListContainer from "./TodoListContainer";
 import TodoFormContainer from "./TodoFormContainer";
 import "./App.css";
-import { Route, Link, Redirect } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
 const App = () => {
   return (
@@ -14,10 +14,9 @@ const App = () => {
       <p>
         <Link to="/todos/new">Add a todo</Link>
       </p>
-      <Route path="/todos" component={TodoListContainer} />
+      <Route exact path="/todos" component={TodoListContainer} />
       <Route path="/todos/new" component={TodoFormContainer} />
       <Route path="/todos/:id/edit" component={TodoFormContainer} />
-      <Route exact path="/" render={() => <Redirect to="/todos" />} />
     </div>
   );
 };
