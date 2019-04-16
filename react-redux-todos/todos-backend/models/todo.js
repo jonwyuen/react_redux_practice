@@ -4,7 +4,7 @@ mongoose.set("debug", true);
 mongoose.Promise = Promise;
 
 const todoSchema = new mongoose.Schema({
-  task: String
+  todo: String
 });
 
 const Todo = mongoose.model("Todo", todoSchema);
