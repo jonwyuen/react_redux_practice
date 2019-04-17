@@ -5,7 +5,7 @@ class TodoForm extends Component {
     super(props);
     this.state = {
       todo: props.todo ? props.todo.todo : "",
-      id: props.todo ? props.todo.id : null
+      id: props.todo ? props.todo._id : null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

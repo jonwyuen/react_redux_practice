@@ -12,7 +12,7 @@ class Todo extends Component {
   }
 
   render() {
-    let { todo, id } = this.props;
+    const { todo, id } = this.props;
     return (
       <div>
         <li>

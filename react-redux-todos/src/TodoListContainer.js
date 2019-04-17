@@ -1,18 +1,27 @@
-import React from "react";
+import React, { Component } from "react";
 import TodoList from "./TodoList";
 import { connect } from "react-redux";
-import { removeTodo } from "./actionCreators";
+import { removeTodo, getTodos } from "./actionCreators";
 
-const TodoListContainer = ({ todos, removeTodo }) => (
-  <div>
-    <h1>Todos</h1>
-    <TodoList todos={todos} removeTodo={removeTodo} />
-  </div>
-);
+class TodoListContainer extends Component {
+  componentDidMount() {
+    this.props.getTodos();
+  }
+
+  render() {
+    const { todos, removeTodo } = this.props;
+    return (
+      <div>
+        <h1>Todos</h1>
+        <TodoList todos={todos} removeTodo={removeTodo} />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => ({ todos: state.todos });
 
 export default connect(
   mapStateToProps,
-  { removeTodo }
+  { removeTodo, getTodos }
 )(TodoListContainer);

@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTodo, editTodo } from "./actionCreators";
+import { addTodo, editTodo, getTodos } from "./actionCreators";
 import TodoForm from "./TodoForm";
 
 class TodoFormContainer extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getTodos();
   }
 
   handleSubmit(id, todo) {
@@ -28,7 +32,7 @@ const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
   if (id) {
     return {
-      todo: state.todos.find(todo => todo.id === +id)
+      todo: state.todos.find(todo => todo._id === id)
     };
   }
   return { todo: null };
@@ -36,5 +40,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { addTodo, editTodo }
+  { addTodo, editTodo, getTodos }
 )(TodoFormContainer);
