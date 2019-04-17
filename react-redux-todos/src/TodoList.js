@@ -11,7 +11,7 @@ const TodoList = ({ todos, removeTodo }) => {
           todo={todo.todo}
           id={todo._id}
           key={todo._id}
-          removeTodo={removeTodo}
+          removeTodo={removeTodo.bind(this, todo._id)}
         />
       ))}
     </div>
