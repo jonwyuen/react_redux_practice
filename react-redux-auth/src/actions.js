@@ -13,7 +13,7 @@ export const setAuthorizationToken = token => {
   }
 };
 
-export const signUp = userData => {
+export const signup = userData => {
   return dispatch => {
     return axios.post(`${BASE_URL}/api/users`, userData);
   };

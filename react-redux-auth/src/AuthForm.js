@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { signUp } from "./actions";
+import { signup, login } from "./actions";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
-class Signup extends Component {
+class AuthForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      formType: props.location.pathname === "/signup" ? "signup" : "login"
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,17 +23,29 @@ class Signup extends Component {
   }
 
   handleSubmit(e) {
+    const { username, password, formType } = this.state;
     e.preventDefault();
-    this.props
-      .signUp(this.state)
-      .then(() => {
-        // arrow fn to correctly bind this to this.props.history.push
-        this.props.history.push("/login");
-      })
-      .catch(err => console.log(err));
+    if (formType === "signup") {
+      this.props
+        .signup({ username, password })
+        .then(() => {
+          // arrow fn to correctly bind this to this.props.history.push
+          this.props.history.push("/login");
+        })
+        .catch(err => console.log(err));
+    } else {
+      this.props
+        .login({ username, password })
+        .then(() => {
+          this.props.history.push("/welcome");
+        })
+        .catch(err => console.log(err));
+    }
   }
 
   render() {
+    const { username, password, formType } = this.state;
+    const buttonText = formType === "signup" ? "Sign Up" : "Log In";
     return (
       <div className="row">
         <div className="col-md-4 col-md-offset-4">
@@ -44,7 +57,7 @@ class Signup extends Component {
                 type="text"
                 id="username"
                 name="username"
-                value={this.state.username}
+                value={username}
                 onChange={this.handleChange}
               />
             </div>
@@ -54,12 +67,12 @@ class Signup extends Component {
                 type="password"
                 id="password"
                 name="password"
-                value={this.state.password}
+                value={password}
                 onChange={this.handleChange}
               />
             </div>
             <div className="form-group">
-              <button className="btn btn-primary btn-lg">Sign Up</button>
+              <button className="btn btn-primary btn-lg">{buttonText}</button>
             </div>
           </form>
         </div>
@@ -68,13 +81,14 @@ class Signup extends Component {
   }
 }
 
-Signup.propTypes = {
-  signUp: PropTypes.func.isRequired
+AuthForm.propTypes = {
+  signup: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired
 };
 
 export default withRouter(
   connect(
     null,
-    { signUp }
-  )(Signup)
+    { signup, login }
+  )(AuthForm)
 );
