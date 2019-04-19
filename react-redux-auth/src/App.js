@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AuthForm from "./AuthForm";
 import Welcome from "./Welcome";
+import NavigationBar from "./NavigationBar";
 import requireAuth from "./requireAuth";
 import "./App.css";
 
@@ -10,6 +11,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
+          <NavigationBar />
           <Switch>
             <Route path="/login" component={AuthForm} />
             <Route path="/signup" component={AuthForm} />
