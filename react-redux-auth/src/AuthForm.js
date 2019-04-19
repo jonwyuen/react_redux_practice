@@ -45,12 +45,12 @@ class AuthForm extends Component {
 
   render() {
     const { username, password, formType } = this.state;
-    const buttonText = formType === "signup" ? "Sign Up" : "Log In";
+    const formText = formType === "signup" ? "Sign Up" : "Log In";
     return (
       <div className="row">
         <div className="col-md-4 col-md-offset-4">
           <form onSubmit={this.handleSubmit}>
-            <h1>Sign Up</h1>
+            <h1>{formText}</h1>
             <div className="form-group">
               <label htmlFor="username">Username</label>
               <input
@@ -72,7 +72,7 @@ class AuthForm extends Component {
               />
             </div>
             <div className="form-group">
-              <button className="btn btn-primary btn-lg">{buttonText}</button>
+              <button className="btn btn-primary btn-lg">{formText}</button>
             </div>
           </form>
         </div>
