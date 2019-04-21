@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "tv",
+      "price": 219.99,
+      "image_url": "https://images.samsung.com/is/image/samsung/latin_en-hd-j4300ah-un32j4300ahxpa-001-front-indigo-blue"
+    },
+    {
+      "id": 2,
+      "name": "microwave",
+      "price": 100.0,
+      "image_url": "https://target.scene7.com/is/image/Target/GUEST_c59b9457-3ee1-463b-ad0a-42f48d06c140"
+    },
+    {
+      "id": 3,
+      "name": "toaster oven",
+      "price": 20.49,
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/81110bb7g2L._SL1500_.jpg"
+    },
+    {
+      "id": 4,
+      "name": "chair",
+      "price": 100.89,
+      "image_url": "https://www.ikea.com/PIAimages/0355482_PE547815_S5.JPG"
+    },
+    {
+      "id": 5,
+      "name": "mirror",
+      "price": 20.99,
+      "image_url": "https://target.scene7.com/is/image/Target/GUEST_703892ef-2db0-4e02-b9c8-685e4a5c37a0"
+    },
+    {
+      "id": 6,
+      "name": "phone",
+      "price": 399.99,
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/717DO5Q-aCL._SY879_.jpg"
+    }
+  ]
+}
