@@ -11,9 +11,15 @@ class ItemList extends Component {
   }
 
   render() {
-    const { items } = this.state;
-    const itemList = items.map(item => <Item key={item.id} item={item} />);
-    return <div>{itemList}</div>;
+    const itemList = this.state.items.map(item => (
+      <Item key={item.id} item={item} />
+    ));
+    return (
+      <div>
+        <h3>Items For Sale</h3>
+        <div className="row">{itemList}</div>
+      </div>
+    );
   }
 }
 

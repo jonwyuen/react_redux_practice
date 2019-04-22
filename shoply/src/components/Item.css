@@ -1,0 +1,11 @@
+.item-img {
+  height: 20vh;
+  width: 100%;
+  object-fit: contain;
+}
+
+.item-name {
+  text-transform: capitalize;
+  font-size: 1em;
+}
+  
