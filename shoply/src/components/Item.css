@@ -6,6 +6,10 @@
 
 .item-name {
   text-transform: capitalize;
-  font-size: 1em;
+  font-size: 1.2em;
 }
-  
+
+.item-card {
+  border: 0.5px solid gray;
+  border-radius: 10px;
+}
