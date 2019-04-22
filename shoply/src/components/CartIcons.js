@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./CartIcons.css";
 
 const CartIcons = ({ addToCart, removeFromCart }) => {
@@ -14,6 +15,16 @@ const CartIcons = ({ addToCart, removeFromCart }) => {
       />
     </div>
   );
+};
+
+CartIcons.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+  removeFromCart: PropTypes.func.isRequired
+};
+
+CartIcons.defaultProps = {
+  addToCart: () => console.log("Add item to cart"),
+  removeFromCart: () => console.log("Remove item from cart")
 };
 
 export default CartIcons;

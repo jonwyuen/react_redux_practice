@@ -1,5 +1,6 @@
 import React from "react";
 import CartIcons from "./CartIcons";
+import PropTypes from "prop-types";
 import "./Item.css";
 
 const Item = ({ item }) => {
@@ -19,6 +20,19 @@ const Item = ({ item }) => {
       </div>
     </div>
   );
+};
+
+Item.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    image_url: PropTypes.string
+  }).isRequired
+};
+
+Item.defaultProps = {
+  item: {}
 };
 
 export default Item;
