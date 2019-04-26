@@ -9,18 +9,15 @@ const INITIAL_STATE = {
   discountAmount: 0
 };
 
-/* cartItems: [{
-  name:
-  quantity:
-  id:
-  price:
-}]
-
-*/
+const discountTypes = new Map([
+  ["REMOVE10", 0.1],
+  ["REMOVE20", 0.2],
+  ["REMOVE30", 0.3]
+]);
 
 const rootReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ADD_TO_CART:
+    case ADD_TO_CART: {
       const foundIndex = state.cartItems.findIndex(
         item => item.name === action.item.name
       );
@@ -45,10 +42,46 @@ const rootReducer = (state = INITIAL_STATE, action) => {
         cartItems,
         cartTotal: calcCartTotal(cartItems, state.discountAmount)
       };
-    case REMOVE_FROM_CART:
-      return;
+    }
+    case REMOVE_FROM_CART: {
+      const foundIndex = state.cartItems.findIndex(
+        item => item.name === action.item.name
+      );
+      // only one of that item in cart
+      if (state.cartItems[foundIndex].quantity === 1) {
+        const cartItems = state.cartItems.filter(
+          (item, idx) => idx !== foundIndex
+        );
+        return {
+          ...state,
+          cartItems,
+          cartValue: calcCartTotal(cartItems, state.discountAmount)
+        };
+        // more than one of that item
+      } else if (state.cartItems[foundIndex].quantity > 1) {
+        const foundItem = { ...state.cartItems[foundIndex] };
+        foundItem.quantity--;
+        state.cartItems[foundIndex] = foundItem;
+        return {
+          ...state,
+          cartItems: [...state.cartItems],
+          cartValue: calcCartTotal(state.cartItems, state.discountAmount)
+        };
+      }
+      // item not in cart
+      return state;
+    }
     case APPLY_DISCOUNT:
-      return;
+      if (!state.discountApplied && discountTypes.has(action.discount)) {
+        const discountAmount = discountTypes.get(action.discount);
+        return {
+          ...state,
+          cartValue: calcCartTotal(state.cartItems, discountAmount),
+          discountApplied: true,
+          discountAmount
+        };
+      }
+      return state;
     default:
       return state;
   }
