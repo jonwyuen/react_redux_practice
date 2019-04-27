@@ -63,20 +63,36 @@ class Cart extends Component {
       discountApplied,
       discountAmount
     } = this.props;
+
+    const discountForm = (
+      <form onSubmit={this.handleDiscount}>
+        <label htmlFor="discount">Discount:</label>
+        <input
+          type="text"
+          name="discount"
+          value={this.state.discount}
+          onChange={this.handleChange}
+        />
+        <button>Apply Discount</button>
+      </form>
+    );
     return cartItems.length > 0 ? (
       <div>
         {this.renderTable()}
-        <h4>
+        <h3>
           Total: ${cartTotal}{" "}
           {discountApplied ? (
             <span className="text-success">
-              {(discountAmount * 100).toFixed(0)}% - You saved $
-              {(cartTotal * (discountAmount * 100)).toFixed(2)}
+              {(discountAmount * 100).toFixed(0)}% off - You saved $
+              {(cartTotal / (1 - discountAmount) - cartTotal).toFixed(2)}
             </span>
           ) : null}{" "}
-        </h4>
+        </h3>
+        {discountForm}
       </div>
-    ) : null;
+    ) : (
+      <h3>No items in cart...</h3>
+    );
   }
 }
 
