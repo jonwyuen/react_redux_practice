@@ -7,6 +7,16 @@ export const addToCart = item => {
   };
 };
 
-export const removeFromCart = item => {};
+export const removeFromCart = item => {
+  return {
+    type: REMOVE_FROM_CART,
+    item
+  };
+};
 
-export const applyDiscount = discount => {};
+export const applyDiscount = discount => {
+  return {
+    type: APPLY_DISCOUNT,
+    discount
+  };
+};
