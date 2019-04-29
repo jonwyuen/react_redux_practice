@@ -1,6 +1,5 @@
 import { ADD_TO_CART, REMOVE_FROM_CART, APPLY_DISCOUNT } from "./actionTypes";
 import { calcCartTotal } from "./helpers";
-import uuid from "uuid/v4";
 
 const INITIAL_STATE = {
   cartItems: [],
@@ -25,7 +24,7 @@ const rootReducer = (state = INITIAL_STATE, action) => {
       if (foundIndex === -1) {
         newItem = {
           name: action.item.name,
-          id: uuid(),
+          id: action.item.id,
           price: action.item.price,
           quantity: 1
         };

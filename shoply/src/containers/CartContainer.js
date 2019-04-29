@@ -10,7 +10,7 @@ const CartContainer = props => {
 const mapStateToProps = state => {
   return {
     cartItems: state.cartItems,
-    cartValue: state.cartValue,
+    cartTotal: state.cartTotal,
     discountApplied: state.discountApplied,
     discountAmount: state.discountAmount
   };

@@ -32,8 +32,8 @@ class Cart extends Component {
       return (
         <tr key={item.id}>
           <td className="text-center align-middle">{item.name}</td>
-          <td className="text-center align-middle">{item.name}</td>
-          <td className="text-center align-middle">{item.name}</td>
+          <td className="text-center align-middle">{item.quantity}</td>
+          <td className="text-center align-middle">${item.price}</td>
           <td>
             <CartIconsContainer item={item} />
           </td>

@@ -24,7 +24,7 @@ const Item = ({ item }) => {
 
 Item.propTypes = {
   item: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     name: PropTypes.string,
     price: PropTypes.number,
     image_url: PropTypes.string
