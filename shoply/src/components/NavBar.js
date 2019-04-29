@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { calcTotalQuantity } from "../helpers";
 
 const NavBar = ({ cartItems, cartTotal }) => {
@@ -19,10 +19,8 @@ const NavBar = ({ cartItems, cartTotal }) => {
           </span>
         </li>
         <li className="nav-item">
-          <Link>
-            <Link to="/cart" className="nav-link text-light">
-              Cart
-            </Link>
+          <Link to="/cart" className="nav-link text-light">
+            Cart
           </Link>
         </li>
       </ul>

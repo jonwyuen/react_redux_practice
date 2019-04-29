@@ -106,7 +106,7 @@ Cart.propTypes = {
     })
   ).isRequired,
   cartTotal: PropTypes.number.isRequired,
-  discountApplied: PropTypes.isBool.isRequired,
+  discountApplied: PropTypes.bool.isRequired,
   discountAmount: PropTypes.number.isRequired
 };
 
