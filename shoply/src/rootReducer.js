@@ -47,6 +47,8 @@ const rootReducer = (state = INITIAL_STATE, action) => {
       const foundIndex = state.cartItems.findIndex(
         item => item.name === action.item.name
       );
+      // item not in cart
+      if (foundIndex === -1) return state;
       // only one of that item in cart
       if (state.cartItems[foundIndex].quantity === 1) {
         const cartItems = state.cartItems.filter(
@@ -55,7 +57,7 @@ const rootReducer = (state = INITIAL_STATE, action) => {
         return {
           ...state,
           cartItems,
-          cartValue: calcCartTotal(cartItems, state.discountAmount)
+          cartTotal: calcCartTotal(cartItems, state.discountAmount)
         };
         // more than one of that item
       } else if (state.cartItems[foundIndex].quantity > 1) {
@@ -65,10 +67,9 @@ const rootReducer = (state = INITIAL_STATE, action) => {
         return {
           ...state,
           cartItems: [...state.cartItems],
-          cartValue: calcCartTotal(state.cartItems, state.discountAmount)
+          cartTotal: calcCartTotal(state.cartItems, state.discountAmount)
         };
       }
-      // item not in cart
       return state;
     }
     case APPLY_DISCOUNT:

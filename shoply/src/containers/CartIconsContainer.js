@@ -1,14 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import CartIcons from "../components/CartIcons";
 import { addToCart, removeFromCart } from "../actions";
 
-class CartIconsContainer extends Component {
-  render() {
-    return <CartIcons {...this.props} />;
-  }
-}
+const CartIconsContainer = props => {
+  return <CartIcons {...props} />;
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
@@ -19,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 CartIconsContainer.propTypes = {
   item: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     price: PropTypes.number,
     image_url: PropTypes.string

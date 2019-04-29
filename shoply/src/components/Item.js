@@ -1,5 +1,5 @@
 import React from "react";
-import CartIcons from "./CartIcons";
+import CartIconsContainer from "../containers/CartIconsContainer";
 import PropTypes from "prop-types";
 import "./Item.css";
 
@@ -15,7 +15,7 @@ const Item = ({ item }) => {
             <p className="item-name">{item.name}</p>
             <p>${item.price}</p>
           </div>
-          <CartIcons />
+          <CartIconsContainer item={item} />
         </div>
       </div>
     </div>
