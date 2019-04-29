@@ -7,3 +7,7 @@ export const calcCartTotal = (cart, discount = 0) => {
     ) / 100
   );
 };
+
+export const calcTotalQuantity = cart => {
+  return +cart.reduce((acc, next) => (acc += next.quantity), 0);
+};
