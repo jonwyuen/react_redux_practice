@@ -72,14 +72,16 @@ const rootReducer = (state = INITIAL_STATE, action) => {
       return state;
     }
     case APPLY_DISCOUNT:
-      if (!state.discountApplied && discountTypes.has(action.discount)) {
+      if (discountTypes.has(action.discount)) {
         const discountAmount = discountTypes.get(action.discount);
-        return {
-          ...state,
-          cartValue: calcCartTotal(state.cartItems, discountAmount),
-          discountApplied: true,
-          discountAmount
-        };
+        if (discountAmount > state.discountAmount || !state.discountApplied) {
+          return {
+            ...state,
+            cartTotal: calcCartTotal(state.cartItems, discountAmount),
+            discountApplied: true,
+            discountAmount
+          };
+        }
       }
       return state;
     default:
