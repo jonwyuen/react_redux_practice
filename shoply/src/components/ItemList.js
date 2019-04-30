@@ -28,7 +28,7 @@ class ItemList extends Component {
       <Item key={item.id} item={item} />
     ));
     return (
-      <div>
+      <div className="mt-3">
         <h3>Items For Sale</h3>
         <div className="row">{itemList}</div>
       </div>

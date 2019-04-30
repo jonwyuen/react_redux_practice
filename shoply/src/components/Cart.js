@@ -33,7 +33,9 @@ class Cart extends Component {
         <tr key={item.id}>
           <td className="text-center align-middle">{item.name}</td>
           <td className="text-center align-middle">{item.quantity}</td>
-          <td className="text-center align-middle">${item.price}</td>
+          <td className="text-center align-middle">
+            ${item.price * item.quantity}
+          </td>
           <td>
             <CartIconsContainer item={item} />
           </td>
@@ -66,14 +68,16 @@ class Cart extends Component {
 
     const discountForm = (
       <form onSubmit={this.handleDiscount}>
-        <label htmlFor="discount">Discount:</label>
+        <label className="mr-2" htmlFor="discount">
+          Discount:{" "}
+        </label>
         <input
           type="text"
           name="discount"
           value={this.state.discount}
           onChange={this.handleChange}
         />
-        <button>Apply Discount</button>
+        <button className="ml-2 btn btn-primary">Apply Discount</button>
       </form>
     );
     return cartItems.length > 0 ? (
@@ -88,7 +92,7 @@ class Cart extends Component {
             </span>
           ) : null}{" "}
         </h3>
-        {discountForm}
+        <div className="mt-3">{discountForm}</div>
       </div>
     ) : (
       <h3>No items in cart...</h3>

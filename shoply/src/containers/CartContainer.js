@@ -4,7 +4,11 @@ import Cart from "../components/Cart";
 import { applyDiscount } from "../actions";
 
 const CartContainer = props => {
-  return <Cart {...props} />;
+  return (
+    <div className="mt-4">
+      <Cart {...props} />
+    </div>
+  );
 };
 
 const mapStateToProps = state => {
