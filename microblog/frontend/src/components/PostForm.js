@@ -29,8 +29,49 @@ class PostForm extends Component {
 
   render() {
     return (
-      <form>
-        <div />
+      <form className="mb-4" onSumbit={this.handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="form-title">Title: </label>
+          <input
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            id="form-title"
+            name="title"
+            value={this.state.title}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="form-description">Description: </label>
+          <input
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            id="form-description"
+            name="description"
+            value={this.state.description}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="form-body">Body: </label>
+          <textarea
+            type="text"
+            className="form-control"
+            onChange={this.handleChange}
+            id="form-body"
+            name="body"
+            rows={15}
+            value={this.state.body}
+          />
+        </div>
+        <div>
+          <button type="submit" className="btn btn-primary mr-2">
+            Submit
+          </button>
+          <button className="btn btn-secondary" onClick={this.props.cancel}>
+            Cancel
+          </button>
+        </div>
       </form>
     );
   }
