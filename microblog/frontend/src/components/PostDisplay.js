@@ -1,23 +1,45 @@
 import React from "react";
 import "./PostDisplay.css";
 
-const PostDisplay = ({ title, description, body, votes }) => {
+const PostDisplay = ({
+  title,
+  description,
+  body,
+  votes,
+  toggleEdit,
+  deletePost,
+  vote
+}) => {
   return (
     <div className="post-display">
       <div>
         <h2>{title}</h2>
-        <p>{description}</p>
+        <p>
+          <i>{description}</i>
+        </p>
         <div>{body}</div>
       </div>
       <div className="post-display-right">
         <div className="post-display-edit">
-          <i className="fas fa-edit text-primary" />
-          <i className="fas fa-times text-danger" />
+          <i
+            className="fas fa-edit text-primary ml-2"
+            onClick={() => toggleEdit()}
+          />
+          <i
+            className="fas fa-times text-danger ml-2"
+            onClick={() => deletePost()}
+          />
         </div>
         <div className="post-display-votes">
           <h4>{votes} votes:</h4>
-          <i className="fas fa-thumbs-up text-success" />
-          <i className="fas fa-thumbs-down text-danger" />
+          <i
+            className="fas fa-thumbs-up text-success"
+            onClick={() => vote("up")}
+          />
+          <i
+            className="fas fa-thumbs-down text-danger"
+            onClick={() => vote("down")}
+          />
         </div>
       </div>
     </div>
