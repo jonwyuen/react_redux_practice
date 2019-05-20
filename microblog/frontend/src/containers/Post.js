@@ -62,11 +62,32 @@ class Post extends Component {
   }
 
   render() {
+    const post = this.props.post;
+    if (!post) return <p>Loading...</p>;
+
     return (
       <div className="post">
-        <PostDisplay />
+        {this.state.isEditing ? (
+          <PostForm
+            post={post}
+            savePost={this.editPost}
+            cancel={this.toggleEdit}
+          />
+        ) : (
+          <PostDisplay
+            post={post}
+            toggleEdit={this.toggleEdit}
+            deletePost={this.deletePost}
+            vote={this.vote}
+          />
+        )}
         <section>
           <h4>Comments</h4>
+          <CommentList
+            comments={post.commments}
+            deleteComment={this.deleteComment}
+          />
+          <CommentForm submitCommentForm={this.addComment} />
         </section>
       </div>
     );
