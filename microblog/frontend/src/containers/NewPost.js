@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./NewPost.css";
 import { connect } from "react-redux";
 import { addPostToAPI } from "../actions/posts";
 import PostForm from "../components/PostForm";

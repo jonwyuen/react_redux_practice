@@ -1,0 +1,14 @@
+.post-display {
+  position: relative;
+}
+
+.post-display-right {
+  position: absolute;
+  right: 0;
+  top: 1em;
+  text-align: right;
+}
+
+.post-display-right i {
+  margin-left: 1em;
+}
