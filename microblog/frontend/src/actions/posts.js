@@ -66,7 +66,7 @@ const updatePost = post => {
   };
 };
 
-export const updatePostToAPI = (postId, title, body, description) => {
+export const updatePostInAPI = (postId, title, body, description) => {
   return async dispatch => {
     const response = await axios.put(`${API_URL}/${postId}`, {
       title,
@@ -85,7 +85,7 @@ const sendVote = (postId, votes) => {
   };
 };
 
-export const sendVotetoAPI = (postId, direction) => {
+export const sendVoteToAPI = (postId, direction) => {
   return async dispatch => {
     const response = await axios.post(`${API_URL}/${postId}/vote/${direction}`);
     return dispatch(sendVote(postId, response.data.votes));

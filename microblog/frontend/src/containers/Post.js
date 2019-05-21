@@ -4,7 +4,7 @@ import {
   getPostFromAPI,
   updatePostInAPI,
   sendVoteToAPI,
-  sendCommentToAPI,
+  addCommentToAPI,
   removeCommentFromAPI,
   removePostFromAPI
 } from "../actions/posts";
@@ -54,7 +54,7 @@ class Post extends Component {
   }
 
   addComment(comment) {
-    this.props.sendCommentToAPI(this.props.post.id, comment);
+    this.props.addCommentToAPI(this.props.post.id, comment);
   }
 
   deleteComment(commentId) {
@@ -108,7 +108,7 @@ export default connect(
     getPostFromAPI,
     updatePostInAPI,
     sendVoteToAPI,
-    sendCommentToAPI,
+    addCommentToAPI,
     removeCommentFromAPI,
     removePostFromAPI
   }
