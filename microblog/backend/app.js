@@ -5,6 +5,11 @@ const cors = require("cors");
 
 const app = express();
 
+const postsRoutes = require("./routes/posts");
+const commentsRoutes = require("./routes/comments");
+
+app.use("/api/posts", postsRoutes);
+app.use("/api/:post_id/comments", commentsRoutes);
 app.use(morgan("tiny"));
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
