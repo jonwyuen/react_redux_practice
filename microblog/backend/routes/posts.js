@@ -64,3 +64,23 @@ router.get("/", async (req, res, next) => {
     return next(err);
   }
 });
+
+/** POST /     add a new post
+ *
+ * { title, description, body }  =>  { id, title, description, body, votes }
+ *
+ */
+
+router.post("/" async (req, res, next) => {
+  try {
+    const { title, description, body } = req.params;
+    const result = await db.query(`
+      INSERT INTO posts (title, description, body) 
+      VALUES ($1, $2, $3) 
+      RETURNING *`, [title, description, body])
+    return res.json(result.rows[0]);
+  } catch (err) {
+    return next(err);
+  }
+})
+
