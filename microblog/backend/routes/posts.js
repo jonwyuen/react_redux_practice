@@ -71,16 +71,80 @@ router.get("/", async (req, res, next) => {
  *
  */
 
-router.post("/" async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
-    const { title, description, body } = req.params;
-    const result = await db.query(`
+    const { title, description, body } = req.body;
+    const result = await db.query(
+      `
       INSERT INTO posts (title, description, body) 
       VALUES ($1, $2, $3) 
-      RETURNING *`, [title, description, body])
+      RETURNING *`,
+      [title, description, body]
+    );
+    return res.status(201).json(result.rows[0]);
+  } catch (err) {
+    return next(err);
+  }
+});
+
+/** POST /[id]/vote/(up|down)    Update up/down as post
+ *
+ * => { votes: updated-vote-count }
+ *
+ */
+
+router.post("/:id/vote/:direction", async (req, res, next) => {
+  try {
+    let dir = req.params.direction === "up" ? +1 : -1;
+    const result = await db.query(
+      "UPDATE posts SET votes=votes + $1 WHERE id = $2 RETURNING votes",
+      [dir, req.params.id]
+    );
     return res.json(result.rows[0]);
   } catch (err) {
     return next(err);
   }
-})
+});
 
+/** PUT /[id]     update existing post
+ *
+ * { title, description, body }  =>  { id, title, description, body, votes }
+ *
+ */
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const { title, description, body } = req.body;
+    const result = await db.query(
+      `
+      UPDATE posts SET title=$1, description=$2, body=$3 
+      WHERE id = $4 
+      RETURNING *`,
+      [title, description, body, req.params.id]
+    );
+    return res.json(result.rows[0]);
+  } catch (err) {
+    return next(err);
+  }
+});
+
+/** DELETE /[id]     delete post
+ *
+ * => { message: "deleted" }
+ *
+ */
+
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const result = await db.query(
+      `
+      DELETE FROM posts WHERE id=$1`,
+      [req.params.id]
+    );
+    return res.json({ message: "deleted" });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+module.exports = router;
