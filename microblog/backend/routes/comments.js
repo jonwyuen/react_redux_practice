@@ -59,3 +59,20 @@ router.put("/:comment_id", async (req, res, next) => {
     return next(err);
   }
 });
+
+/** DELETE /[id]      delete comment
+ *
+ * => { message: "deleted" }
+ *
+ */
+
+router.delete("/:comment_id", async (req, res, next) => {
+  try {
+    await db.query(`DELETE FROM comments WHERE id=$1`, [req.params.comment_id]);
+    return res.json({ message: "deleted" });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+module.exports = router;
