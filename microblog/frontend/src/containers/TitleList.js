@@ -11,6 +11,12 @@ class TitleList extends Component {
     }
   }
 
+  async componentDidUpdate(prevProps) {
+    if (this.props.titles.length !== prevProps.titles.length) {
+      await this.props.fetchTitlesFromAPI();
+    }
+  }
+
   vote(direction, id) {
     this.props.sendVoteToAPI(id, direction);
   }
