@@ -32,11 +32,11 @@ class TitleList extends Component {
               <small>{title.votes} votes</small>
               <i
                 className="fas fa-thumbs-up text-success ml-2"
-                onClick={this.vote("up", title.id)}
+                onClick={() => this.vote("up", title.id)}
               />
               <i
                 className="fas fa-thumbs-down text-danger ml-2"
-                onClick={this.vote("down", title.id)}
+                onClick={() => this.vote("down", title.id)}
               />
             </div>
           </div>
