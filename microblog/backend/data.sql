@@ -15,9 +15,9 @@ CREATE TABLE comments (id SERIAL PRIMARY KEY,
                        post_id INT NOT NULL REFERENCES posts ON DELETE CASCADE);
 
 INSERT INTO posts (title, description, body) VALUES
-    ('First Post', 'First Post!', 'This is the first post'),
-    ('Second Post', 'Second Post!', 'Wow! A second post.');
+    ('First Post', 'Best post ever!', 'Everyone loves posting first. I win!'),
+    ('Second Post', 'A very good post!', 'Oh well. Didn''t get to be first.');
 
 INSERT INTO comments (text, post_id) VALUES
     ('This is a really great post.', 1),
-    ('Yup, its really good.', 1);
+    ('I learned so much reading this.', 1);
