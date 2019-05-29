@@ -73,7 +73,7 @@ export const updatePostInAPI = (postId, title, body, description) => {
       body,
       description
     });
-    return dispatch(updatePost(response));
+    return dispatch(updatePost(response.data));
   };
 };
 

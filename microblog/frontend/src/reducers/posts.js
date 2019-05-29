@@ -24,7 +24,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
     case UPDATE_POST:
       return {
         ...state,
-        [action.postId]: {
+        [action.post.id]: {
           ...action.post,
           comments: state[action.post.id].comments
         }

@@ -24,7 +24,7 @@ class Post extends Component {
     this.deletePost = this.deletePost.bind(this);
     this.vote = this.vote.bind(this);
     this.addComment = this.addComment.bind(this);
-    this.removeComment = this.removeComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
   }
 
   async componentDidMount() {
@@ -70,7 +70,7 @@ class Post extends Component {
         {this.state.isEditing ? (
           <PostForm
             post={post}
-            savePost={this.editPost}
+            addPost={this.editPost}
             cancel={this.toggleEdit}
           />
         ) : (
@@ -84,7 +84,7 @@ class Post extends Component {
         <section>
           <h4>Comments</h4>
           <CommentList
-            comments={post.commments}
+            comments={post.comments}
             deleteComment={this.deleteComment}
           />
           <CommentForm submitCommentForm={this.addComment} />

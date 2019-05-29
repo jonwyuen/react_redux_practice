@@ -32,7 +32,7 @@ router.post("/", async (req, res, next) => {
       `
       INSERT INTO comments (text, post_id) 
       VALUES ($1, $2) RETURNING id, text`,
-      [req.body.text, req.params.post_id]
+      [req.body.comment, req.params.post_id]
     );
     return res.status(201).json(result.rows[0]);
   } catch (err) {

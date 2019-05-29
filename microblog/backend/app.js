@@ -13,8 +13,8 @@ app.use(cors());
 app.use(morgan("tiny"));
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/api/posts/:post_id/comments", commentsRoutes);
 app.use("/api/posts", postsRoutes);
-app.use("/api/:post_id/comments", commentsRoutes);
 
 app.use((req, res, next) => {
   const err = new Error("Not Found");

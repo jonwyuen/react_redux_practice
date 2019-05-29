@@ -1,15 +1,8 @@
 import React from "react";
 import "./PostDisplay.css";
 
-const PostDisplay = ({
-  title,
-  description,
-  body,
-  votes,
-  toggleEdit,
-  deletePost,
-  vote
-}) => {
+const PostDisplay = ({ post, toggleEdit, deletePost, vote }) => {
+  const { title, description, body, votes } = post;
   return (
     <div className="post-display">
       <div>

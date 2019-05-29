@@ -16,7 +16,7 @@ class CommentForm extends Component {
     });
   }
 
-  handleSumbit(e) {
+  handleSubmit(e) {
     e.preventDefault();
     this.props.submitCommentForm(this.state.text);
     this.setState({ text: "" });
