@@ -1,13 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { shallow } from "enzyme";
 import App from "../App";
 import CommentBox from "../CommentBox";
 
+// shallow renders just the component and none of its children
+
 it("shows a comment box", () => {
-  const div = document.createElement("div");
-  ReactDOM.render(<App />, div);
-
-  expect(div.innerHTML).toContain("Comment Box");
-
-  ReactDOM.unmountComponentAtNode(div);
+  const wrapped = shallow(<App />);
+  // find returns array of all instances of found component
+  expect(wrapped.find(CommentBox).length).toEqual(1);
 });
