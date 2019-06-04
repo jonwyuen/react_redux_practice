@@ -19,10 +19,23 @@ it("has a text area and a button", () => {
 
 // sim event => find element, sim change evt, provide fake evt obj, force component to update, assert value has changed
 
-it("has a text area that users can type in", () => {
-  wrapper.find("textarea").simulate("change", {
-    target: { name: "comment", value: "new comment" }
+describe("text area", () => {
+  beforeEach(() => {
+    wrapper.find("textarea").simulate("change", {
+      target: { name: "comment", value: "new comment" }
+    });
+    wrapper.update();
   });
-  wrapper.update();
-  expect(wrapper.find("textarea").props().value).toEqual("new comment");
+
+  it("has a text area that users can type in", () => {
+    expect(wrapper.find("textarea").props().value).toEqual("new comment");
+  });
+
+  it("empties text area when form is submitted", () => {
+    wrapper.find("form").simulate("submit", {
+      target: { name: "comment" }
+    });
+    wrapper.update();
+    expect(wrapper.find("textarea").props().value).toEqual("");
+  });
 });
