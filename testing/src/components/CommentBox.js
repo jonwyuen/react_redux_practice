@@ -1,33 +1,17 @@
 import React, { Component } from "react";
 
 class CommentBox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { comment: "" };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = { comment: "" };
 
-  handleChange(e) {
+  handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     // call action creator and save comment
     this.setState({ [e.target.name]: "" });
-  }
-  // state = { comment: "" };
-
-  // handleChange = e => {
-  //   this.setState({ [e.target.name]: e.target.value });
-  // };
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   // call action creator and save comment
-  //   this.setState({ [e.target.name]: "" });
-  // };
+  };
 
   render() {
     return (
