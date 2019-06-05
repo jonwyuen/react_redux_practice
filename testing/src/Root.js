@@ -5,6 +5,8 @@ import reducers from "reducers";
 
 const store = createStore(reducers, {});
 
-export const Root = props => {
+const Root = props => {
   return <Provider store={store}>{props.children}</Provider>;
 };
+
+export default Root;
