@@ -19,7 +19,7 @@ afterEach(() => {
 
 it("has a text area and a button", () => {
   expect(wrapper.find("textarea").length).toEqual(1);
-  expect(wrapper.find("button").length).toEqual(1);
+  expect(wrapper.find("button").length).toEqual(2);
 });
 
 // sim event => find element, sim change evt, provide fake evt obj, force component to update, assert value has changed
