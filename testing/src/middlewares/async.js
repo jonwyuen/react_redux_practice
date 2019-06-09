@@ -1,3 +1,8 @@
+/*
+react calls action creator -> returns action -> sent to middleware ->
+forwards action to reducers -> produces new state
+*/
+
 export default ({ dispatch }) => next => action => {
   // check to see if action has promise on payload property
   // if no, send action on to next middleware
