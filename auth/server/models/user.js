@@ -10,6 +10,8 @@ const userSchema = new Schema({
 // hook that runs before saving model
 userSchema.pre("save", next => {
   const user = this;
+  // salt + plain pw = (salt + hashed pw)
+  // salt + submitted pw = hashed pw -> compare hashed pw in db
   // gen a salt then run cb
   bcrypt.genSalt(10, (err, salt) => {
     if (err) return next(err);
