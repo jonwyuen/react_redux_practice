@@ -32,7 +32,7 @@ exports.signup = (req, res, next) => {
     const user = new User({ email, password });
     user.save(err => {
       if (err) return next(err);
+      res.json({ token: tokenForUser(user) });
     });
-    res.json({ token: tokenForUser(user) });
   });
 };
