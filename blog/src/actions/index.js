@@ -1,9 +1,18 @@
 import { FETCH_POSTS } from "./types";
 import { FETCH_USER } from "./types";
 import jsonPlaceholder from "../apis/jsonPlaceholder";
+import _ from "lodash";
 
-export const fetchPostsAndUsers = () => async dispatch => {
+export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   await dispatch(fetchPosts());
+  // const userIds = _.uniq(_.map(getState().posts, "userId"));
+  // userIds.forEach(id => dispatch(fetchUser(id)));
+
+  _.chain(getState().posts)
+    .map("userId")
+    .uniq()
+    .forEach(id => dispatch(fetchUser(id)))
+    .value();
 };
 
 export const fetchPosts = () => async dispatch => {
