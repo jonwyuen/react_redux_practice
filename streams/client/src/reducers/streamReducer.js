@@ -15,7 +15,7 @@ export default (state = {}, action) => {
         acc[cur.id] = cur;
         return acc;
       }, {});
-      return { ...state, newState };
+      return { ...state, ...newState };
     }
     case FETCH_STREAM:
       return { ...state, [action.payload.id]: action.payload };
