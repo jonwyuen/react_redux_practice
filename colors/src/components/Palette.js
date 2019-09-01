@@ -1,5 +1,6 @@
 import React from "react";
 import ColorBox from "./ColorBox";
+import "./Palette.css";
 
 const Palette = props => {
   const colorBoxes = props.colors.map(color => (
