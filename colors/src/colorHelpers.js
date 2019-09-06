@@ -9,4 +9,27 @@ const generatePalette = starterPalette => {
     emoji: starterPalette.emoji,
     colors: {}
   };
+  for (let level of levels) {
+    newPalette.colors[level] = [];
+  }
+  for (let color of starterPalette.colors) {
+  }
+};
+
+const getRange = hexColor => {
+  const end = "#fff";
+  return [
+    chroma(hexColor)
+      .darken(1.4)
+      .hex(),
+    hexColor,
+    end
+  ];
+};
+
+const generateScale = (hexColor, numberOfColors) => {
+  return chroma
+    .scale(getRange(hexColor))
+    .mode("lab")
+    .colors(numberOfColors);
 };
