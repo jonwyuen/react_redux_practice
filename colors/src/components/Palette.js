@@ -16,7 +16,7 @@ const Palette = ({ palette }) => {
   };
 
   const colorBoxes = palette.colors[level].map(color => (
-    <ColorBox background={color[format]} name={color.name} />
+    <ColorBox key={color.id} background={color[format]} name={color.name} />
   ));
   return (
     <div className="Palette">
@@ -26,6 +26,10 @@ const Palette = ({ palette }) => {
         changeFormat={changeFormat}
       />
       <div className="Palette-colors">{colorBoxes}</div>
+      <footer className="Palette-footer">
+        {palette.paletteName}
+        <span className="emoji">{palette.emoji}</span>
+      </footer>
     </div>
   );
 };
