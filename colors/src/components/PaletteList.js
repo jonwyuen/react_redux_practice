@@ -33,7 +33,8 @@ const styles = {
 	}
 };
 
-const PaletteList = ({ classes, palettes }) => {
+const PaletteList = ({ classes, history, palettes }) => {
+	const goToPalette = id => history.push(`/palette/${id}`);
 	return (
 		<div className={classes.root}>
 			<div className={classes.container}>
@@ -41,7 +42,12 @@ const PaletteList = ({ classes, palettes }) => {
 					<h1>React Colors</h1>
 				</nav>
 				<div className={classes.palettes}>
-					{palettes.map(palette => <MiniPalette {...palette} />)}
+					{palettes.map(palette => (
+						<MiniPalette
+							{...palette}
+							goToPalette={() => goToPalette(palette.id)}
+						/>
+					))}
 				</div>
 			</div>
 		</div>
