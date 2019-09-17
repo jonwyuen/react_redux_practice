@@ -26,6 +26,10 @@ const App = () => {
 					/>
 				)}
 			/>
+			<Route
+				path="/palette/:paletteId/:colorId"
+				render={() => <h1>Hello</h1>}
+			/>
 		</Switch>
 	);
 };
