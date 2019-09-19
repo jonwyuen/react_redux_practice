@@ -31,6 +31,7 @@ const Palette = ({ palette }) => {
 				level={level}
 				changeLevel={changeLevel}
 				changeFormat={changeFormat}
+				showingAllColors
 			/>
 			<div className="Palette-colors">{colorBoxes}</div>
 			<footer className="Palette-footer">

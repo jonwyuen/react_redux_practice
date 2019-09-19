@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import ColorBox from "./ColorBox";
+import Navbar from "./Navbar";
 
 const SingleColorPalette = ({ colorId, palette }) => {
+	const [ format, setFormat ] = useState("hex");
+
+	const changeFormat = value => {
+		setFormat(value);
+	};
+
 	const gatherShades = (palette, colorToFilterBy) => {
 		let shades = [];
 		let allColors = palette.colors;
@@ -19,12 +26,14 @@ const SingleColorPalette = ({ colorId, palette }) => {
 		<ColorBox
 			id={color.id}
 			name={color.name}
-			background={color.hex}
+			background={color[format]}
 			showLink={false}
 		/>
 	));
+
 	return (
 		<div className="Palette">
+			<Navbar changeFormat={changeFormat} showingAllColors={false} />
 			<h1>Single Color Palette</h1>
 			<div className="Palette-colors">{colorBoxes}</div>
 		</div>
