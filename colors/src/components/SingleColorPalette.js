@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
+import PaletteFooter from "./PaletteFooter";
 
 const SingleColorPalette = ({ colorId, palette }) => {
+	const { colors, paletteName, emoji } = palette;
 	const [ format, setFormat ] = useState("hex");
 
 	const changeFormat = value => {
@@ -11,7 +13,7 @@ const SingleColorPalette = ({ colorId, palette }) => {
 
 	const gatherShades = (palette, colorToFilterBy) => {
 		let shades = [];
-		let allColors = palette.colors;
+		let allColors = colors;
 
 		for (let key in allColors) {
 			shades = shades.concat(
@@ -34,8 +36,8 @@ const SingleColorPalette = ({ colorId, palette }) => {
 	return (
 		<div className="Palette">
 			<Navbar changeFormat={changeFormat} showingAllColors={false} />
-			<h1>Single Color Palette</h1>
 			<div className="Palette-colors">{colorBoxes}</div>
+			<PaletteFooter paletteName={paletteName} emoji={emoji} />
 		</div>
 	);
 };
