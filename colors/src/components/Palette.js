@@ -24,7 +24,7 @@ const Palette = ({ palette }) => {
 			paletteId={palette.id}
 			background={color[format]}
 			name={color.name}
-			showLink
+			showingFullPalette
 		/>
 	));
 	return (
