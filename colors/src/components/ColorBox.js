@@ -63,7 +63,7 @@ const styles = {
 		textTransform: "uppercase",
 		border: "none",
 		textDecoration: "none",
-		opacity: "0"
+		opacity: 0
 	},
 	boxContent: {
 		position: "absolute",
@@ -77,32 +77,32 @@ const styles = {
 		fontSize: "12px"
 	},
 	copyOverlay: {
-		opacity: "0",
-		zIndex: "0",
+		opacity: 0,
+		zIndex: 0,
 		height: "100%",
 		width: "100%",
 		transition: "transform 0.6s ease-in -out",
 		transform: "scale(0.1)"
 	},
 	showOverlay: {
-		opacity: "1",
+		opacity: 1,
 		transform: "scale(50)",
-		zIndex: "10",
+		zIndex: 10,
 		position: "absolute"
 	},
 	copyMessage: {
 		position: "fixed",
-		left: "0",
-		right: "0",
-		top: "0",
-		bottom: "0",
+		left: "0px",
+		right: "0px",
+		top: "0px",
+		bottom: "0px",
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
 		justifyContent: "center",
 		fontSize: "4rem",
 		transform: "scale(0.1)",
-		opacity: "0",
+		opacity: 0,
 		color: "white",
 		"& h1": {
 			fontWeight: "400",
@@ -111,12 +111,12 @@ const styles = {
 			width: "100%",
 			textAlign: "center",
 			textTransform: "uppercase",
-			marginBottom: "0",
+			marginBottom: "0px",
 			padding: "1rem"
 		},
 		"& p": {
 			fontSize: "2rem",
-			fontWeight: "100"
+			fontWeight: 100
 		}
 	},
 	showMessage: {
