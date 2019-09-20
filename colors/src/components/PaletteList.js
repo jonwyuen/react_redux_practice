@@ -1,37 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MiniPalette from "./MiniPalette";
+import styles from "../styles/PaletteListStyles";
 import { withStyles } from "@material-ui/styles";
-
-const styles = {
-	root: {
-		backgroundColor: "blue",
-		height: "100vh",
-		display: "flex",
-		alignItems: "flex-start",
-		justifyContent: "center"
-	},
-	container: {
-		width: "50%",
-		display: "flex",
-		flexDirection: "column",
-		flexWrap: "wrap",
-		alignItems: "flex-start"
-	},
-	nav: {
-		display: "flex",
-		width: "100%",
-		justifyContent: "space-between",
-		color: "white"
-	},
-	palettes: {
-		boxSizing: "border-box",
-		width: "100%",
-		display: "grid",
-		gridTemplateColumns: "repeat(3, 30%)",
-		gridGap: "5%"
-	}
-};
 
 const PaletteList = ({ classes, history, palettes }) => {
 	const goToPalette = id => history.push(`/palette/${id}`);
