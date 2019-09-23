@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MiniPalette from "./MiniPalette";
-import styles from "../styles/PaletteListStyles";
-import { withStyles } from "@material-ui/styles";
+import useStyles from "../styles/PaletteListStyles";
 
-const PaletteList = ({ classes, history, palettes }) => {
+const PaletteList = ({ history, palettes }) => {
+	const classes = useStyles();
 	const goToPalette = id => history.push(`/palette/${id}`);
 	return (
 		<div className={classes.root}>
@@ -26,4 +26,4 @@ const PaletteList = ({ classes, history, palettes }) => {
 	);
 };
 
-export default withStyles(styles)(PaletteList);
+export default PaletteList;

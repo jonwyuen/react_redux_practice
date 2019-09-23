@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import styles from "../styles/ColorBoxStyles";
-import { withStyles } from "@material-ui/styles";
+import useStyles from "../styles/ColorBoxStyles";
 
-const ColorBox = ({
-	name,
-	background,
-	paletteId,
-	id,
-	showingFullPalette,
-	classes
-}) => {
+const ColorBox = ({ name, background, paletteId, id, showingFullPalette }) => {
+	const classes = useStyles({ background, showingFullPalette });
 	const [ copied, setCopied ] = useState(false);
 
 	useEffect(
@@ -57,4 +50,4 @@ const ColorBox = ({
 	);
 };
 
-export default withStyles(styles)(ColorBox);
+export default ColorBox;

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
-import styles from "../styles/PaletteStyles";
-import { withStyles } from "@material-ui/styles";
+import useStyles from "../styles/PaletteStyles";
 
-const SingleColorPalette = ({ colorId, palette, classes }) => {
+const SingleColorPalette = ({ colorId, palette }) => {
+	const classes = useStyles();
 	const { colors, paletteName, emoji, id } = palette;
 	const [ format, setFormat ] = useState("hex");
 
@@ -50,4 +50,4 @@ const SingleColorPalette = ({ colorId, palette, classes }) => {
 	);
 };
 
-export default withStyles(styles)(SingleColorPalette);
+export default SingleColorPalette;

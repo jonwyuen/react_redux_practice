@@ -1,4 +1,6 @@
-export default {
+import { makeStyles } from "@material-ui/styles";
+
+export default makeStyles({
 	Palette: {
 		height: "100vh",
 		display: "flex",
@@ -37,4 +39,4 @@ export default {
 			textDecoration: "none"
 		}
 	}
-};
+});

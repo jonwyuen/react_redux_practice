@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
-import styles from "../styles/PaletteStyles";
-import { withStyles } from "@material-ui/styles";
+import useStyles from "../styles/PaletteStyles";
 
-const Palette = ({ palette, classes }) => {
-	const { colors, paletteName, emoji } = palette;
+const Palette = ({ palette }) => {
+	const classes = useStyles();
+	const { colors, paletteName, emoji, id } = palette;
 	const [ level, setLevel ] = useState(500);
 	const [ format, setFormat ] = useState("hex");
 
@@ -22,7 +22,7 @@ const Palette = ({ palette, classes }) => {
 		<ColorBox
 			key={color.id}
 			id={color.id}
-			paletteId={palette.id}
+			paletteId={id}
 			background={color[format]}
 			name={color.name}
 			showingFullPalette
@@ -42,4 +42,4 @@ const Palette = ({ palette, classes }) => {
 	);
 };
 
-export default withStyles(styles)(Palette);
+export default Palette;

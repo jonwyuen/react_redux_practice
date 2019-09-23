@@ -1,4 +1,6 @@
-export default {
+import { makeStyles } from "@material-ui/styles";
+
+export default makeStyles({
 	PaletteFooter: {
 		backgroundColor: "white",
 		height: "5vh",
@@ -11,4 +13,4 @@ export default {
 		fontSize: "1.5rem",
 		margin: "0 1rem"
 	}
-};
+});
