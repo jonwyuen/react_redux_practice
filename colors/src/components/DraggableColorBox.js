@@ -14,9 +14,9 @@ const useStyles = makeStyles({
 	}
 });
 
-const DraggableColorBox = ({ color }) => {
+const DraggableColorBox = ({ color, name }) => {
 	const classes = useStyles({ color });
-	return <div className={classes.root}>{color}</div>;
+	return <div className={classes.root}>{name}</div>;
 };
 
 export default DraggableColorBox;
