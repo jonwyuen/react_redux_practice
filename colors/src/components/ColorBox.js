@@ -28,7 +28,7 @@ const ColorBox = ({ name, background, paletteId, id, showingFullPalette }) => {
 				<div
 					className={`${classes.copyMessage} ${copied && classes.showMessage}`}
 				>
-					<h1 className>copied!</h1>
+					<h1>copied!</h1>
 					<p className={classes.copyText}>{background}</p>
 				</div>
 				<div>

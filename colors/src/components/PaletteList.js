@@ -17,6 +17,7 @@ const PaletteList = ({ history, palettes }) => {
 					{palettes.map(palette => (
 						<MiniPalette
 							{...palette}
+							key={palette.paletteName}
 							goToPalette={() => goToPalette(palette.id)}
 						/>
 					))}
