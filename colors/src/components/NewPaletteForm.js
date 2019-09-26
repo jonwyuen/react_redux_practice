@@ -74,12 +74,13 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const NewPaletteForm = ({ savePalette, history }) => {
+const NewPaletteForm = ({ savePalette, palettes, history }) => {
 	const classes = useStyles();
 	const [ open, setOpen ] = useState(false);
 	const [ currentColor, setCurrentColor ] = useState("teal");
 	const [ colors, setColors ] = useState([ { color: "blue", name: "blue" } ]);
-	const [ newName, setNewName ] = useState("");
+	const [ newColorName, setNewColorName ] = useState("");
+	const [ newPaletteName, setNewPaletteName ] = useState("");
 
 	useEffect(
 		() => {
@@ -93,6 +94,17 @@ const NewPaletteForm = ({ savePalette, history }) => {
 		[ colors, currentColor ]
 	);
 
+	useEffect(
+		() => {
+			ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
+				palettes.every(
+					({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
+				)
+			);
+		},
+		[ palettes ]
+	);
+
 	const updateCurrentColor = newColor => setCurrentColor(newColor.hex);
 
 	const handleDrawerOpen = () => setOpen(true);
@@ -102,19 +114,23 @@ const NewPaletteForm = ({ savePalette, history }) => {
 	const addNewColor = () => {
 		const newColor = {
 			color: currentColor,
-			name: newName
+			name: newColorName
 		};
 		setColors(colors => [ ...colors, newColor ]);
-		setNewName("");
+		setNewColorName("");
 	};
 
-	const handleChange = e => setNewName(e.target.value);
+	const handleChange = e => {
+		let val = e.target.value;
+		e.target.name === "newColorName"
+			? setNewColorName(val)
+			: setNewPaletteName(val);
+	};
 
 	const handleSavePalette = () => {
-		let newName = "New Test Palette";
 		const newPalette = {
-			paletteName: newName,
-			id: newName.toLowerCase().replace(/ /g, "-"),
+			paletteName: newPaletteName,
+			id: newPaletteName.toLowerCase().replace(/ /g, "-"),
 			colors
 		};
 		savePalette(newPalette);
@@ -144,13 +160,22 @@ const NewPaletteForm = ({ savePalette, history }) => {
 					<Typography variant="h6" noWrap>
 						Persistent drawer
 					</Typography>
-					<Button
-						variant="contained"
-						color="primary"
-						onClick={handleSavePalette}
-					>
-						Save Palette
-					</Button>
+					<ValidatorForm onSubmit={handleSavePalette}>
+						<TextValidator
+							label="Palette Name"
+							name="newPaletteName"
+							value={newPaletteName}
+							onChange={handleChange}
+							validators={[ "required", "isPaletteNameUnique" ]}
+							errorMessages={[
+								"Enter a palette name",
+								"Palette name already used!"
+							]}
+						/>
+						<Button variant="contained" color="primary" type="submit">
+							Save Palette
+						</Button>
+					</ValidatorForm>
 				</Toolbar>
 			</AppBar>
 			<Drawer
@@ -183,7 +208,8 @@ const NewPaletteForm = ({ savePalette, history }) => {
 				/>
 				<ValidatorForm onSubmit={addNewColor}>
 					<TextValidator
-						value={newName}
+						name="newColorName"
+						value={newColorName}
 						onChange={handleChange}
 						validators={[ "required", "isColorNameUnique", "isColorUnique" ]}
 						errorMessages={[
