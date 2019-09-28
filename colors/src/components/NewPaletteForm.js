@@ -11,7 +11,9 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import DraggableColorBox from "./DraggableColorBox";
+import DraggableColorList from "./DraggableColorList";
+import { DndProvider } from "react-dnd";
+import HTML5Backend from "react-dnd-html5-backend";
 import { ChromePicker } from "react-color";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
@@ -238,14 +240,13 @@ const NewPaletteForm = ({ savePalette, palettes, history }) => {
 				})}
 			>
 				<div className={classes.drawerHeader} />
-				{colors.map(color => (
-					<DraggableColorBox
-						key={color.name}
-						color={color.color}
-						name={color.name}
-						handleClick={() => removeColor(color.name)}
+				<DndProvider backend={HTML5Backend}>
+					<DraggableColorList
+						colors={colors}
+						setColors={setColors}
+						removeColor={removeColor}
 					/>
-				))}
+				</DndProvider>
 			</main>
 		</div>
 	);
