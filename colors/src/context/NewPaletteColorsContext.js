@@ -6,7 +6,7 @@ const NewPaletteColorsProvider = props => {
 	const [ colors, setColors ] = useState([ { color: "blue", name: "blue" } ]);
 
 	return (
-		<NewPaletteColorsContext.Provider value={(colors, setColors)}>
+		<NewPaletteColorsContext.Provider value={[ colors, setColors ]}>
 			{props.children}
 		</NewPaletteColorsContext.Provider>
 	);

@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 		cursor: "pointer",
 		marginBottom: "-3.5px",
 		backgroundColor: props => props.color,
+		opacity: props => (props.isDragging ? 0 : 1),
 		"&:hover svg": {
 			color: "white",
 			transform: "scale(1.5)"
@@ -42,24 +43,13 @@ const useStyles = makeStyles({
 	}
 });
 
-const styles = {
-	// border: "1px dashed gray",
-	// padding: "0.5rem 1rem",
-	// marginBottom: ".5rem",
-	// backgroundColor: "white",
-	// cursor: "move"
-};
-
 const DraggableColorBox = ({
 	color,
 	name,
 	handleClick,
-	id,
 	index,
 	moveColorBox
 }) => {
-	const classes = useStyles({ color });
-
 	const ref = useRef(null);
 	const [ , drop ] = useDrop({
 		accept: ItemTypes.BOX,
@@ -103,14 +93,14 @@ const DraggableColorBox = ({
 		}
 	});
 	const [ { isDragging }, drag ] = useDrag({
-		item: { type: ItemTypes.BOX, id, index },
+		item: { type: ItemTypes.BOX, name, index },
 		collect: monitor => ({
 			isDragging: monitor.isDragging()
 		})
 	});
-	const opacity = isDragging ? 0 : 1;
 	drag(drop(ref));
 
+	const classes = useStyles({ color, isDragging });
 	return (
 		<div ref={ref} className={classes.root}>
 			<div className={classes.boxContent}>
@@ -122,19 +112,3 @@ const DraggableColorBox = ({
 };
 
 export default DraggableColorBox;
-
-// const style = {
-// 	border: '1px dashed gray',
-// 	padding: '0.5rem 1rem',
-// 	marginBottom: '.5rem',
-// 	backgroundColor: 'white',
-// 	cursor: 'move',
-// }
-// const Card = ({ id, text, index, moveCard }) => {
-
-// 	return (
-// 		<div ref={ref} style={{ ...style, opacity }}>
-// 			{text}
-// 		</div>
-// 	)
-// }

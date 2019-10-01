@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -12,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DraggableColorList from "./DraggableColorList";
+import { NewPaletteColorsContext } from "../context/NewPaletteColorsContext";
 import { DndProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import { ChromePicker } from "react-color";
@@ -80,9 +81,9 @@ const NewPaletteForm = ({ savePalette, palettes, history }) => {
 	const classes = useStyles();
 	const [ open, setOpen ] = useState(false);
 	const [ currentColor, setCurrentColor ] = useState("teal");
-	const [ colors, setColors ] = useState([ { color: "blue", name: "blue" } ]);
 	const [ newColorName, setNewColorName ] = useState("");
 	const [ newPaletteName, setNewPaletteName ] = useState("");
+	const [ colors, setColors ] = useContext(NewPaletteColorsContext);
 
 	useEffect(
 		() => {
@@ -137,10 +138,6 @@ const NewPaletteForm = ({ savePalette, palettes, history }) => {
 		};
 		savePalette(newPalette);
 		history.push("/");
-	};
-
-	const removeColor = colorName => {
-		setColors(colors => colors.filter(color => color.name !== colorName));
 	};
 
 	return (
@@ -241,11 +238,7 @@ const NewPaletteForm = ({ savePalette, palettes, history }) => {
 			>
 				<div className={classes.drawerHeader} />
 				<DndProvider backend={HTML5Backend}>
-					<DraggableColorList
-						colors={colors}
-						setColors={setColors}
-						removeColor={removeColor}
-					/>
+					<DraggableColorList />
 				</DndProvider>
 			</main>
 		</div>

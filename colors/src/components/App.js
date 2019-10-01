@@ -6,6 +6,7 @@ import SingleColorPalette from "./SingleColorPalette";
 import NewPaletteForm from "./NewPaletteForm";
 import seedColors from "../seedColors";
 import { generatePalette } from "../colorHelpers";
+import { NewPaletteColorsProvider } from "../context/NewPaletteColorsContext";
 
 const App = () => {
 	const [ palettes, setPalettes ] = useState(seedColors);
@@ -21,11 +22,13 @@ const App = () => {
 				exact
 				path="/palette/new"
 				render={routeProps => (
-					<NewPaletteForm
-						{...routeProps}
-						savePalette={savePalette}
-						palettes={palettes}
-					/>
+					<NewPaletteColorsProvider>
+						<NewPaletteForm
+							{...routeProps}
+							savePalette={savePalette}
+							palettes={palettes}
+						/>
+					</NewPaletteColorsProvider>
 				)}
 			/>
 			<Route
