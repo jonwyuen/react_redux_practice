@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import seedColors from "../seedColors";
 
 const NewPaletteColorsContext = React.createContext([ {}, () => {} ]);
 
 const NewPaletteColorsProvider = props => {
-	const [ colors, setColors ] = useState([ { color: "blue", name: "blue" } ]);
+	const [ colors, setColors ] = useState(seedColors[0]);
 
 	return (
 		<NewPaletteColorsContext.Provider value={[ colors, setColors ]}>
