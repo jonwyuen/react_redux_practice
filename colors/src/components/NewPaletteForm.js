@@ -77,7 +77,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const NewPaletteForm = ({ savePalette, palettes, history }) => {
+const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 	const classes = useStyles();
 	const [ open, setOpen ] = useState(false);
 	const [ currentColor, setCurrentColor ] = useState("teal");
@@ -140,6 +140,16 @@ const NewPaletteForm = ({ savePalette, palettes, history }) => {
 		history.push("/");
 	};
 
+	const clearColors = () => setColors([]);
+
+	const addRandomColor = () => {
+		const allColors = palettes.map(p => p.colors).flat();
+		let randomColor = allColors[Math.floor(Math.random() * allColors.length)];
+		setColors(colors => [ ...colors, randomColor ]);
+	};
+
+	const paletteIsFull = colors.length >= maxColors;
+
 	return (
 		<div className={classes.root}>
 			<CssBaseline />
@@ -198,10 +208,15 @@ const NewPaletteForm = ({ savePalette, palettes, history }) => {
 				<Divider />
 				<Typography variant="h4">Design Your Palette</Typography>
 				<div>
-					<Button variant="contained" color="secondary">
-						Create Palette
+					<Button variant="contained" color="secondary" onClick={clearColors}>
+						Clear Palette
 					</Button>
-					<Button variant="contained" color="primary">
+					<Button
+						variant="contained"
+						color="primary"
+						disable={paletteIsFull}
+						onClick={addRandomColor}
+					>
 						Random Color
 					</Button>
 				</div>
@@ -225,9 +240,10 @@ const NewPaletteForm = ({ savePalette, palettes, history }) => {
 						variant="contained"
 						type="submit"
 						color="primary"
-						style={{ backgroundColor: currentColor }}
+						disable={paletteIsFull}
+						style={{ backgroundColor: paletteIsFull ? "grey" : currentColor }}
 					>
-						Add Color
+						{paletteIsFull ? "Palette is Full" : "Add Color"}
 					</Button>
 				</ValidatorForm>
 			</Drawer>

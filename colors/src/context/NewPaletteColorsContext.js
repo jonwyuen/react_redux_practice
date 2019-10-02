@@ -4,7 +4,7 @@ import seedColors from "../seedColors";
 const NewPaletteColorsContext = React.createContext([ {}, () => {} ]);
 
 const NewPaletteColorsProvider = props => {
-	const [ colors, setColors ] = useState(seedColors[0]);
+	const [ colors, setColors ] = useState(seedColors[0].colors);
 
 	return (
 		<NewPaletteColorsContext.Provider value={[ colors, setColors ]}>

@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 		display: "inline-block",
 		position: "relative",
 		cursor: "pointer",
-		marginBottom: "-3.5px",
+		marginBottom: "-6px",
 		backgroundColor: props => props.color,
 		opacity: props => (props.isDragging ? 0 : 1),
 		"&:hover svg": {
