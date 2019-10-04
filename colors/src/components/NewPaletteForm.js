@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DraggableColorList from "./DraggableColorList";
+import PaletteFormNav from "./PaletteFormNav";
 import { NewPaletteColorsContext } from "../context/NewPaletteColorsContext";
 import { DndProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
@@ -83,7 +79,6 @@ const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 	const [ open, setOpen ] = useState(false);
 	const [ currentColor, setCurrentColor ] = useState("teal");
 	const [ newColorName, setNewColorName ] = useState("");
-	const [ newPaletteName, setNewPaletteName ] = useState("");
 	const [ colors, setColors ] = useContext(NewPaletteColorsContext);
 
 	useEffect(
@@ -96,17 +91,6 @@ const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 			);
 		},
 		[ colors, currentColor ]
-	);
-
-	useEffect(
-		() => {
-			ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
-				palettes.every(
-					({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-				)
-			);
-		},
-		[ palettes ]
 	);
 
 	const updateCurrentColor = newColor => setCurrentColor(newColor.hex);
@@ -125,13 +109,10 @@ const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 	};
 
 	const handleChange = e => {
-		let val = e.target.value;
-		e.target.name === "newColorName"
-			? setNewColorName(val)
-			: setNewPaletteName(val);
+		setNewColorName(e.target.value);
 	};
 
-	const handleSavePalette = () => {
+	const handleSavePalette = newPaletteName => {
 		const newPalette = {
 			paletteName: newPaletteName,
 			id: newPaletteName.toLowerCase().replace(/ /g, "-"),
@@ -153,50 +134,13 @@ const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 
 	return (
 		<div className={classes.root}>
-			<CssBaseline />
-			<AppBar
-				position="fixed"
-				color="default"
-				className={clsx(classes.appBar, {
-					[classes.appBarShift]: open
-				})}
-			>
-				<Toolbar>
-					<IconButton
-						color="inherit"
-						aria-label="open drawer"
-						onClick={handleDrawerOpen}
-						edge="start"
-						className={clsx(classes.menuButton, open && classes.hide)}
-					>
-						<MenuIcon />
-					</IconButton>
-					<Typography variant="h6" noWrap>
-						Persistent drawer
-					</Typography>
-					<ValidatorForm onSubmit={handleSavePalette}>
-						<TextValidator
-							label="Palette Name"
-							name="newPaletteName"
-							value={newPaletteName}
-							onChange={handleChange}
-							validators={[ "required", "isPaletteNameUnique" ]}
-							errorMessages={[
-								"Enter a palette name",
-								"Palette name already used!"
-							]}
-						/>
-						<Button variant="contained" color="primary" type="submit">
-							Save Palette
-						</Button>
-						<Link to="/">
-							<Button variant="contained" color="secondary">
-								Go Back
-							</Button>
-						</Link>
-					</ValidatorForm>
-				</Toolbar>
-			</AppBar>
+			<PaletteFormNav
+				open={open}
+				classes={classes}
+				palettes={palettes}
+				handleSavePalette={handleSavePalette}
+				handleDrawerOpen={handleDrawerOpen}
+			/>
 			<Drawer
 				className={classes.drawer}
 				variant="persistent"
@@ -220,7 +164,7 @@ const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 					<Button
 						variant="contained"
 						color="primary"
-						disable={paletteIsFull}
+						disabled={paletteIsFull}
 						onClick={addRandomColor}
 					>
 						Random Color
@@ -246,7 +190,7 @@ const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 						variant="contained"
 						type="submit"
 						color="primary"
-						disable={paletteIsFull}
+						disabled={paletteIsFull}
 						style={{ backgroundColor: paletteIsFull ? "grey" : currentColor }}
 					>
 						{paletteIsFull ? "Palette is Full" : "Add Color"}
