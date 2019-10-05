@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -9,11 +9,10 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DraggableColorList from "./DraggableColorList";
 import PaletteFormNav from "./PaletteFormNav";
+import ColorPickerForm from "./ColorPickerForm";
 import { NewPaletteColorsContext } from "../context/NewPaletteColorsContext";
 import { DndProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
-import { ChromePicker } from "react-color";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 const drawerWidth = 400;
 
@@ -77,40 +76,12 @@ const useStyles = makeStyles(theme => ({
 const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 	const classes = useStyles();
 	const [ open, setOpen ] = useState(false);
-	const [ currentColor, setCurrentColor ] = useState("teal");
-	const [ newColorName, setNewColorName ] = useState("");
+
 	const [ colors, setColors ] = useContext(NewPaletteColorsContext);
-
-	useEffect(
-		() => {
-			ValidatorForm.addValidationRule("isColorNameUnique", value =>
-				colors.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
-			);
-			ValidatorForm.addValidationRule("isColorUnique", value =>
-				colors.every(({ color }) => color !== currentColor)
-			);
-		},
-		[ colors, currentColor ]
-	);
-
-	const updateCurrentColor = newColor => setCurrentColor(newColor.hex);
 
 	const handleDrawerOpen = () => setOpen(true);
 
 	const handleDrawerClose = () => setOpen(false);
-
-	const addNewColor = () => {
-		const newColor = {
-			color: currentColor,
-			name: newColorName
-		};
-		setColors(colors => [ ...colors, newColor ]);
-		setNewColorName("");
-	};
-
-	const handleChange = e => {
-		setNewColorName(e.target.value);
-	};
 
 	const handleSavePalette = newPaletteName => {
 		const newPalette = {
@@ -170,32 +141,7 @@ const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 						Random Color
 					</Button>
 				</div>
-				<ChromePicker
-					color={currentColor}
-					onChangeComplete={updateCurrentColor}
-				/>
-				<ValidatorForm onSubmit={addNewColor}>
-					<TextValidator
-						name="newColorName"
-						value={newColorName}
-						onChange={handleChange}
-						validators={[ "required", "isColorNameUnique", "isColorUnique" ]}
-						errorMessages={[
-							"Enter a color name",
-							"Color name must be unique",
-							"Color already used!"
-						]}
-					/>
-					<Button
-						variant="contained"
-						type="submit"
-						color="primary"
-						disabled={paletteIsFull}
-						style={{ backgroundColor: paletteIsFull ? "grey" : currentColor }}
-					>
-						{paletteIsFull ? "Palette is Full" : "Add Color"}
-					</Button>
-				</ValidatorForm>
+				<ColorPickerForm paletteIsFull={paletteIsFull} />
 			</Drawer>
 			<main
 				className={clsx(classes.content, {
