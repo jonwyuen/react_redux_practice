@@ -8,13 +8,14 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-
+import useStyles from "../styles/PaletteFormNavStyles";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+
+const drawerWidth = 400;
 
 const PaletteFormNav = ({
 	palettes,
 	handleSavePalette,
-	classes,
 	handleDrawerOpen,
 	open
 }) => {
@@ -35,8 +36,10 @@ const PaletteFormNav = ({
 		setNewPaletteName(e.target.value);
 	};
 
+	const classes = useStyles({ drawerWidth });
+
 	return (
-		<React.Fragment>
+		<div className={classes.root}>
 			<CssBaseline />
 			<AppBar
 				position="fixed"
@@ -56,8 +59,10 @@ const PaletteFormNav = ({
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" noWrap>
-						Persistent drawer
+						Create a Palette
 					</Typography>
+				</Toolbar>
+				<div className={classes.navBtns}>
 					<ValidatorForm onSubmit={() => handleSavePalette(newPaletteName)}>
 						<TextValidator
 							label="Palette Name"
@@ -73,15 +78,15 @@ const PaletteFormNav = ({
 						<Button variant="contained" color="primary" type="submit">
 							Save Palette
 						</Button>
-						<Link to="/">
-							<Button variant="contained" color="secondary">
-								Go Back
-							</Button>
-						</Link>
 					</ValidatorForm>
-				</Toolbar>
+					<Link to="/">
+						<Button variant="contained" color="secondary">
+							Go Back
+						</Button>
+					</Link>
+				</div>
 			</AppBar>
-		</React.Fragment>
+		</div>
 	);
 };
 
