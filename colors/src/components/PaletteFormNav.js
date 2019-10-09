@@ -13,12 +13,7 @@ import useStyles from "../styles/PaletteFormNavStyles";
 
 const drawerWidth = 400;
 
-const PaletteFormNav = ({
-	palettes,
-	handleSavePalette,
-	handleDrawerOpen,
-	open
-}) => {
+const PaletteFormNav = ({ handleSavePalette, handleDrawerOpen, open }) => {
 	const classes = useStyles({ drawerWidth });
 
 	return (
@@ -46,10 +41,7 @@ const PaletteFormNav = ({
 					</Typography>
 				</Toolbar>
 				<div className={classes.navBtns}>
-					<PaletteMetaForm
-						palettes={palettes}
-						handleSavePalette={handleSavePalette}
-					/>
+					<PaletteMetaForm handleSavePalette={handleSavePalette} />
 					<Link to="/">
 						<Button variant="contained" color="secondary">
 							Go Back

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { PalettesContext } from "../context/PalettesContext";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -7,7 +8,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
-const PaletteMetaForm = ({ palettes, handleSavePalette }) => {
+const PaletteMetaForm = ({ handleSavePalette }) => {
+	const [ palettes, setPalettes ] = useContext(PalettesContext);
 	const [ open, setOpen ] = useState(false);
 	const [ newPaletteName, setNewPaletteName ] = useState("");
 	const handleClickOpen = () => setOpen(true);

@@ -10,17 +10,19 @@ import DraggableColorList from "./DraggableColorList";
 import PaletteFormNav from "./PaletteFormNav";
 import ColorPickerForm from "./ColorPickerForm";
 import useStyles from "../styles/NewPaletteFormStyles";
+import { PalettesContext } from "../context/PalettesContext";
 import { NewPaletteColorsContext } from "../context/NewPaletteColorsContext";
 import { DndProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 
 const drawerWidth = 400;
 
-const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
+const NewPaletteForm = ({ history, maxColors = 20 }) => {
 	const classes = useStyles({ drawerWidth });
 	const [ open, setOpen ] = useState(false);
 
 	const [ colors, setColors ] = useContext(NewPaletteColorsContext);
+	const [ palettes, setPalettes ] = useContext(PalettesContext);
 
 	const handleDrawerOpen = () => setOpen(true);
 
@@ -32,7 +34,7 @@ const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 			id: newPaletteName.toLowerCase().replace(/ /g, "-"),
 			colors
 		};
-		savePalette(newPalette);
+		setPalettes(palettes => [ ...palettes, newPalette ]);
 		history.push("/");
 	};
 
@@ -50,7 +52,6 @@ const NewPaletteForm = ({ savePalette, palettes, history, maxColors = 20 }) => {
 		<div className={classes.root}>
 			<PaletteFormNav
 				open={open}
-				palettes={palettes}
 				handleSavePalette={handleSavePalette}
 				handleDrawerOpen={handleDrawerOpen}
 			/>
