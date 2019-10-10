@@ -9,7 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 const PaletteMetaForm = ({ handleSavePalette }) => {
-	const [ palettes, setPalettes ] = useContext(PalettesContext);
+	const [ palettes ] = useContext(PalettesContext);
 	const [ open, setOpen ] = useState(false);
 	const [ newPaletteName, setNewPaletteName ] = useState("");
 	const handleClickOpen = () => setOpen(true);

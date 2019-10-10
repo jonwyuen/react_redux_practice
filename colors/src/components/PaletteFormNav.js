@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import PaletteMetaForm from "./PaletteMetaForm";
 import clsx from "clsx";
@@ -11,10 +11,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import useStyles from "../styles/PaletteFormNavStyles";
 
-const drawerWidth = 400;
-
 const PaletteFormNav = ({ handleSavePalette, handleDrawerOpen, open }) => {
-	const classes = useStyles({ drawerWidth });
+	const classes = useStyles();
 
 	return (
 		<div className={classes.root}>
