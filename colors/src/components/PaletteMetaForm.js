@@ -26,9 +26,7 @@ const PaletteMetaForm = ({ handleSavePalette }) => {
 		[ palettes ]
 	);
 
-	const handleChange = e => {
-		setNewPaletteName(e.target.value);
-	};
+	const handleChange = e => setNewPaletteName(e.target.value);
 
 	return (
 		<div>
