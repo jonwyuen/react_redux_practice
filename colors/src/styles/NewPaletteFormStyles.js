@@ -1,5 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
+const drawerWidth = 400;
+
 export default makeStyles(theme => ({
 	root: {
 		display: "flex"
@@ -8,11 +10,11 @@ export default makeStyles(theme => ({
 		display: "none"
 	},
 	drawer: {
-		width: props => props.drawerWidth,
+		width: drawerWidth,
 		flexShrink: 0
 	},
 	drawerPaper: {
-		width: props => props.drawerWidth,
+		width: drawerWidth,
 		display: "flex",
 		alignItems: "center"
 	},
@@ -31,7 +33,7 @@ export default makeStyles(theme => ({
 			easing: theme.transitions.easing.sharp,
 			duration: theme.transitions.duration.leavingScreen
 		}),
-		marginLeft: props => -props.drawerWidth
+		marginLeft: -drawerWidth
 	},
 	contentShift: {
 		transition: theme.transitions.create("margin", {

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import MiniPalette from "./MiniPalette";
+import { PalettesContext } from "../context/PalettesContext";
 import useStyles from "../styles/PaletteListStyles";
 
-const PaletteList = ({ history, palettes }) => {
+const PaletteList = ({ history }) => {
+	const [ palettes ] = useContext(PalettesContext);
 	const classes = useStyles();
 	const goToPalette = id => history.push(`/palette/${id}`);
 	return (

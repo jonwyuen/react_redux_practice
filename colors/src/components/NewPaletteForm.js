@@ -15,10 +15,8 @@ import { NewPaletteColorsContext } from "../context/NewPaletteColorsContext";
 import { DndProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 
-const drawerWidth = 400;
-
 const NewPaletteForm = ({ history, maxColors = 20 }) => {
-	const classes = useStyles({ drawerWidth });
+	const classes = useStyles();
 	const [ open, setOpen ] = useState(false);
 
 	const [ colors, setColors ] = useContext(NewPaletteColorsContext);

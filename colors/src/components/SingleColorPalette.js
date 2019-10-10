@@ -1,19 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
+import { PalettesContext } from "../context/PalettesContext";
+import { generatePalette } from "../colorHelpers";
 import useStyles from "../styles/PaletteStyles";
 
-const SingleColorPalette = ({ colorId, palette }) => {
+const SingleColorPalette = ({ match }) => {
 	const classes = useStyles();
-	const { colors, paletteName, emoji, id } = palette;
 	const [ format, setFormat ] = useState("hex");
+	const [ palettes ] = useContext(PalettesContext);
+	const findPalette = id => palettes.find(palette => palette.id === id);
+	const { colorId, paletteId } = match.params;
+	const palette = generatePalette(findPalette(paletteId));
+	const { colors, paletteName, emoji, id } = palette;
 
-	const changeFormat = value => {
-		setFormat(value);
-	};
+	const changeFormat = value => setFormat(value);
 
 	const gatherShades = (palette, colorToFilterBy) => {
 		let shades = [];
