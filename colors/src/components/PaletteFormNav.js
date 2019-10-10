@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PaletteMetaForm from "./PaletteMetaForm";
 import clsx from "clsx";
@@ -13,6 +13,8 @@ import useStyles from "../styles/PaletteFormNavStyles";
 
 const PaletteFormNav = ({ handleSavePalette, handleDrawerOpen, open }) => {
 	const classes = useStyles();
+	const [ formShow, setFormShow ] = useState(false);
+	const handleShowForm = () => setFormShow(true);
 
 	return (
 		<div className={classes.root}>
@@ -39,14 +41,26 @@ const PaletteFormNav = ({ handleSavePalette, handleDrawerOpen, open }) => {
 					</Typography>
 				</Toolbar>
 				<div className={classes.navBtns}>
-					<PaletteMetaForm handleSavePalette={handleSavePalette} />
 					<Link to="/">
-						<Button variant="contained" color="secondary">
+						<Button
+							variant="contained"
+							color="secondary"
+							className={classes.button}
+						>
 							Go Back
 						</Button>
 					</Link>
+					<Button
+						variant="contained"
+						color="primary"
+						className={classes.button}
+						onClick={handleShowForm}
+					>
+						Save
+					</Button>
 				</div>
 			</AppBar>
+			{formShow && <PaletteMetaForm handleSavePalette={handleSavePalette} />}
 		</div>
 	);
 };
