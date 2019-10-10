@@ -14,7 +14,8 @@ import useStyles from "../styles/PaletteFormNavStyles";
 const PaletteFormNav = ({ handleSavePalette, handleDrawerOpen, open }) => {
 	const classes = useStyles();
 	const [ formShow, setFormShow ] = useState(false);
-	const handleShowForm = () => setFormShow(true);
+	const showForm = () => setFormShow(true);
+	const hideForm = () => setFormShow(false);
 
 	return (
 		<div className={classes.root}>
@@ -54,13 +55,18 @@ const PaletteFormNav = ({ handleSavePalette, handleDrawerOpen, open }) => {
 						variant="contained"
 						color="primary"
 						className={classes.button}
-						onClick={handleShowForm}
+						onClick={showForm}
 					>
 						Save
 					</Button>
 				</div>
 			</AppBar>
-			{formShow && <PaletteMetaForm handleSavePalette={handleSavePalette} />}
+			{formShow && (
+				<PaletteMetaForm
+					handleSavePalette={handleSavePalette}
+					hideForm={hideForm}
+				/>
+			)}
 		</div>
 	);
 };
