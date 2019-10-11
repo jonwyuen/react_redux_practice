@@ -26,12 +26,8 @@ const NewPaletteForm = ({ history, maxColors = 20 }) => {
 
 	const handleDrawerClose = () => setOpen(false);
 
-	const handleSavePalette = newPaletteName => {
-		const newPalette = {
-			paletteName: newPaletteName,
-			id: newPaletteName.toLowerCase().replace(/ /g, "-"),
-			colors
-		};
+	const handleSavePalette = palette => {
+		const newPalette = { ...palette, colors };
 		setPalettes(palettes => [ ...palettes, newPalette ]);
 		history.push("/");
 	};

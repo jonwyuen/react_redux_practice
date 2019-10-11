@@ -17,6 +17,15 @@ const PaletteMetaForm = ({ handleSavePalette, hideForm }) => {
 
 	const showEmojiPicker = () => setStage("emoji");
 
+	const savePalette = emoji => {
+		const newPalette = {
+			paletteName: newPaletteName,
+			id: newPaletteName.toLowerCase().replace(/ /g, "-"),
+			emoji: emoji.native
+		};
+		handleSavePalette(newPalette);
+	};
+
 	useEffect(
 		() => {
 			ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
@@ -34,10 +43,7 @@ const PaletteMetaForm = ({ handleSavePalette, hideForm }) => {
 		<React.Fragment>
 			<Dialog open={stage === "emoji"} onClose={hideForm}>
 				<DialogTitle id="form-dialog-title">Choose a Palette Emoji</DialogTitle>
-				<Picker
-					title="Pick a Palette Emoji"
-					onSelect={() => handleSavePalette(newPaletteName)}
-				/>
+				<Picker title="Pick a Palette Emoji" onSelect={savePalette} />
 			</Dialog>
 			<Dialog
 				open={stage === "form"}
@@ -50,7 +56,6 @@ const PaletteMetaForm = ({ handleSavePalette, hideForm }) => {
 						<DialogContentText>
 							Please enter a name for your palette. Make sure it's unique.
 						</DialogContentText>
-						<Picker />
 						<TextValidator
 							label="Palette Name"
 							name="newPaletteName"
