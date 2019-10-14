@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import seedColors from "../seedColors";
+import { SAVED_PALETTES } from "../constants";
 
 const NewPaletteColorsContext = React.createContext([ {}, () => {} ]);
 
 const NewPaletteColorsProvider = props => {
-	const [ colors, setColors ] = useState(seedColors[0].colors);
+	const [ colors, setColors ] = useState(SAVED_PALETTES[0].colors);
 
 	return (
 		<NewPaletteColorsContext.Provider value={[ colors, setColors ]}>
