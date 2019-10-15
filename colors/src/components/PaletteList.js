@@ -5,9 +5,13 @@ import { PalettesContext } from "../context/PalettesContext";
 import useStyles from "../styles/PaletteListStyles";
 
 const PaletteList = ({ history }) => {
-	const [ palettes ] = useContext(PalettesContext);
+	const [ palettes, setPalettes ] = useContext(PalettesContext);
 	const classes = useStyles();
 	const goToPalette = id => history.push(`/palette/${id}`);
+	const deletePalette = id => {
+		setPalettes(palettes => palettes.filter(palette => palette.id !== id));
+	};
+
 	return (
 		<div className={classes.root}>
 			<div className={classes.container}>
@@ -19,8 +23,10 @@ const PaletteList = ({ history }) => {
 					{palettes.map(palette => (
 						<MiniPalette
 							{...palette}
-							key={palette.paletteName}
-							goToPalette={() => goToPalette(palette.id)}
+							key={palette.id}
+							id={palette.id}
+							deletePalette={deletePalette}
+							goToPalette={goToPalette}
 						/>
 					))}
 				</div>

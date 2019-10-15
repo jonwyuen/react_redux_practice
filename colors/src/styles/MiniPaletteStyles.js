@@ -42,7 +42,6 @@ export default makeStyles({
 		position: "relative",
 		marginBottom: "-3px"
 	},
-	delete: {},
 	deleteIcon: {
 		color: "white",
 		backgroundColor: "#eb3d30",
