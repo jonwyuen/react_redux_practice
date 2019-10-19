@@ -7,7 +7,7 @@ const MiniPalette = ({
 	emoji,
 	colors,
 	id,
-	deletePalette,
+	openDialog,
 	goToPalette
 }) => {
 	const classes = useStyles();
@@ -21,7 +21,7 @@ const MiniPalette = ({
 
 	const handleDeletePalette = e => {
 		e.stopPropagation();
-		deletePalette(id);
+		openDialog(id);
 	};
 
 	return (
