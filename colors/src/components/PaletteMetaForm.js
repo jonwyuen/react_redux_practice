@@ -24,6 +24,7 @@ const PaletteMetaForm = ({ handleSavePalette, hideForm }) => {
 			emoji: emoji.native
 		};
 		handleSavePalette(newPalette);
+		setStage("");
 	};
 
 	useEffect(

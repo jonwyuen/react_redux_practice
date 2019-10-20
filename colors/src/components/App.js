@@ -5,16 +5,17 @@ import Palette from "./Palette";
 import PaletteList from "./PaletteList";
 import SingleColorPalette from "./SingleColorPalette";
 import NewPaletteForm from "./NewPaletteForm";
+import Page from "./Page";
 import { PalettesProvider } from "../context/PalettesContext";
 import { NewPaletteColorsProvider } from "../context/NewPaletteColorsContext";
-import "../styles/App.css";
+import "../styles/Page.css";
 
 const App = () => {
 	return (
 		<Route
 			render={({ location }) => (
 				<TransitionGroup>
-					<CSSTransition key={location.key} classNames="fade" timeout={500}>
+					<CSSTransition key={location.key} classNames="page" timeout={500}>
 						<Switch location={location}>
 							<Route
 								exact
@@ -22,9 +23,9 @@ const App = () => {
 								render={routeProps => (
 									<PalettesProvider>
 										<NewPaletteColorsProvider>
-											<div className="page">
+											<Page>
 												<NewPaletteForm {...routeProps} />
-											</div>
+											</Page>
 										</NewPaletteColorsProvider>
 									</PalettesProvider>
 								)}
@@ -33,32 +34,32 @@ const App = () => {
 								exact
 								path="/"
 								render={routeProps => (
-									<div className="page">
+									<Page>
 										<PalettesProvider>
 											<PaletteList {...routeProps} />
 										</PalettesProvider>
-									</div>
+									</Page>
 								)}
 							/>
 							<Route
 								exact
 								path="/palette/:id"
 								render={routeProps => (
-									<div className="page">
+									<Page>
 										<PalettesProvider>
 											<Palette {...routeProps} />
 										</PalettesProvider>
-									</div>
+									</Page>
 								)}
 							/>
 							<Route
 								path="/palette/:paletteId/:colorId"
 								render={routeProps => (
-									<div className="page">
+									<Page>
 										<PalettesProvider>
 											<SingleColorPalette {...routeProps} />
 										</PalettesProvider>
-									</div>
+									</Page>
 								)}
 							/>
 						</Switch>
