@@ -8,7 +8,7 @@ const TodoList = ({ todos, removeTodo, toggleTodo, editTodo }) => {
   return (
     <Paper>
       <List>
-        {todos.map(todo => (
+        {todos.map((todo, idx) => (
           <Fragment key={todo.id}>
             <Todo
               key={todo.id}
@@ -19,7 +19,7 @@ const TodoList = ({ todos, removeTodo, toggleTodo, editTodo }) => {
               toggleTodo={toggleTodo}
               editTodo={editTodo}
             />
-            <Divider />
+            {idx < todos.length - 1 && <Divider />}
           </Fragment>
         ))}
       </List>

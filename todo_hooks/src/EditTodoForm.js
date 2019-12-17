@@ -11,12 +11,13 @@ const EditTodoForm = ({ id, task, editTodo, toggleIsEditing }) => {
     toggleIsEditing();
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form style={{ marginLeft: "1rem", width: "50%" }} onSubmit={handleSubmit}>
       <TextField
         margin="normal"
         value={value}
         onChange={handleChange}
         fullWidth
+        autoFocus
       />
     </form>
   );
