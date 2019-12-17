@@ -6,24 +6,28 @@ import List from "@material-ui/core/List";
 
 const TodoList = ({ todos, removeTodo, toggleTodo, editTodo }) => {
   return (
-    <Paper>
-      <List>
-        {todos.map((todo, idx) => (
-          <Fragment key={todo.id}>
-            <Todo
-              key={todo.id}
-              id={todo.id}
-              task={todo.task}
-              completed={todo.completed}
-              removeTodo={removeTodo}
-              toggleTodo={toggleTodo}
-              editTodo={editTodo}
-            />
-            {idx < todos.length - 1 && <Divider />}
-          </Fragment>
-        ))}
-      </List>
-    </Paper>
+    <Fragment>
+      {todos.length ? (
+        <Paper>
+          <List>
+            {todos.map((todo, idx) => (
+              <Fragment key={todo.id}>
+                <Todo
+                  key={todo.id}
+                  id={todo.id}
+                  task={todo.task}
+                  completed={todo.completed}
+                  removeTodo={removeTodo}
+                  toggleTodo={toggleTodo}
+                  editTodo={editTodo}
+                />
+                {idx < todos.length - 1 && <Divider />}
+              </Fragment>
+            ))}
+          </List>
+        </Paper>
+      ) : null}
+    </Fragment>
   );
 };
 
